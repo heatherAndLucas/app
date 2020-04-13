@@ -1,6 +1,9 @@
 // Create app namespace to hold all methods
 const app = {};
 
+// API URL
+// https://opentdb.com/api_config.php
+
 // When user clicks the start button, make AJAX request to get questions
 
 // Display questions to user
