@@ -87,9 +87,35 @@ $('#submit').click(
        const checked = $('form input[type=radio]:checked').each(function(index, element){ 
    ans = $(element).val();
    app.userAns.push(ans);
- });
-		console.log(app.userAns);
-		console.log(app.answer);
+	   });
+		
+		if ($(app.userAns).length < 3) {
+		alert('Please answer all the questions!')
+		} else {
+		
+			let correctAns = 0;
+    for (var i = 0; i < app.userAns.length; i++) {
+      
+        if (app.userAns[i] === app.answer[i]) {
+          console.log(`${app.userAns[i]} is correct!`);
+          correctAns = correctAns + 1;
+        }
+      else if (app.userAns[i] != app.answer[i]){
+          console.log(`${app.userAns[i]} is incorrect. The correct answer was ${app.answer[i]}`)
+      }
+
+	}
+		
+		if (correctAns >= 2) {
+			console.log('You win!')
+		}
+	}
+     
+    
+    	
+		
+		// console.log(app.userAns);
+		// console.log(app.answer);
   }
   )
 
