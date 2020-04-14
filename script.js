@@ -16,12 +16,13 @@ app.getQuestions = () => {
     }).then((result) => {
 
 				let questionsArray = result.results;
-				console.log(result)
 				
 			app.displayQuestions(questionsArray);
 
     })
 }
+
+app.answer = []
 
 // Display questions to user
 // Randomly display options of correct and incorrect answers to user
@@ -30,6 +31,7 @@ app.displayQuestions = (questionsArray) => {
         const question = quest.question;
 
         const answer = quest.correct_answer;
+        app.answer.unshift(answer);
 
         const wAnswers = quest.incorrect_answers;
 
@@ -46,8 +48,6 @@ app.displayQuestions = (questionsArray) => {
           return a;
         }
         const shuffArray = shuffle(options);
-
-        console.log(question, options);
 
         const oneQuestion = `
 	          <fieldset>
@@ -77,19 +77,26 @@ app.displayQuestions = (questionsArray) => {
 // When user clicks submit, check user answers against correct answers
 // Verify all questions have been answered
 
+app.userAns = [];
+
 app.submit = () => {
 
 $('#submit').click(
-  function (e) {
+  function (e) {  
     e.preventDefault();
-    const checked = $('form input[type=radio]:checked').val();
-    console.log(checked);
+       const checked = $('form input[type=radio]:checked').each(function(index, element){ 
+   ans = $(element).val();
+   app.userAns.push(ans);
+ });
+		console.log(app.userAns);
+		console.log(app.answer);
   }
-)
+  )
 
 }
   
-  
+
+
     
 
 // Display score/results along with button to play again
