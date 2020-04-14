@@ -4,7 +4,7 @@ const app = {};
 // API URL
 // https://opentdb.com/api_config.php
 
-// When user clicks the start button, make AJAX request to get questions
+// When user clicks the start button, make AJAX request to get questions/answers
 
 // Display questions to user
 // Randomly display options of correct and incorrect answers to user
