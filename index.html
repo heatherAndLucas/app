@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
     <h1>Trivial Pursuit</h1>
@@ -15,9 +15,25 @@
     <section id="questions">
         <form action="#" method="#" class="myForm" name="myForm">
 
-            <button id="submit">Submit!</button>
+            <button id="submit" class="submit">Submit!</button>
         </form>
     </section>
+
+    <!-- Modal -->
+    <div class="modal">
+        <!-- The modal content -->
+        <div class="modal-content">
+            <div id="win">
+
+            </div>
+            <div id="answers">
+
+            </div>
+            <button id="playAgain">Play Again!</button>
+        </div>
+    </div>
+    <div class="modal-overlay">
+    </div>
 
     <script src='https://code.jquery.com/jquery-3.4.0.min.js' integrity='sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=' crossorigin='anonymous'></script>
     <script src="script.js"></script>
