@@ -1,10 +1,10 @@
 // Create app namespace to hold all methods
 const app = {};
 
-// When user clicks the start button, make AJAX request to get questions/answers
 
 app.url = `https://opentdb.com/api.php?amount=3&category=11&difficulty=easy&type=multiple`
 
+// When user clicks the start button, make AJAX request to get questions/answers
 app.getQuestions = () => {
   $.ajax({
     url: app.url,
@@ -15,13 +15,7 @@ app.getQuestions = () => {
     }
   }).then((result) => {
 
-<<<<<<< HEAD
     let questionsArray = result.results;
-=======
-				let questionsArray = result.results;
-				
-			app.displayQuestions(questionsArray);
->>>>>>> master
 
     app.displayQuestions(questionsArray);
 
@@ -31,27 +25,18 @@ app.getQuestions = () => {
 app.answer = []
 
 // Display questions to user
-// Randomly display options of correct and incorrect answers to user
 app.displayQuestions = (questionsArray) => {
-<<<<<<< HEAD
   questionsArray.forEach((quest) => {
     const question = quest.question;
-=======
-	questionsArray.forEach((quest) => {
-        const question = quest.question;
-
-        const answer = quest.correct_answer;
-        app.answer.unshift(answer);
->>>>>>> master
-
+    
     const answer = quest.correct_answer;
     app.answer.unshift(answer);
-
+    
     const wAnswers = quest.incorrect_answers;
-
+    
     const options = [answer, ...wAnswers];
-
-<<<<<<< HEAD
+    
+    // Randomly display options of correct and incorrect answers to user
     function shuffle(a) {
       var j, x, i;
       for (i = a.length - 1; i > 0; i--) {
@@ -64,10 +49,8 @@ app.displayQuestions = (questionsArray) => {
     }
     const shuffArray = shuffle(options);
 
+    // Place question and answer options pulled from api and format for placement on page
     const oneQuestion = `
-=======
-        const oneQuestion = `
->>>>>>> master
 	          <fieldset>
               <legend>${question}</legend>
               <label for="option1">${shuffArray[0]}</label>
@@ -82,20 +65,15 @@ app.displayQuestions = (questionsArray) => {
         `
     $('form').prepend(oneQuestion);
   })
+  $('#submit').show();
 }
 
-
-
-
-
-// When user clicks submit, check user answers against correct answers
-// Verify all questions have been answered
 
 app.userAns = [];
 
 app.submit = () => {
-
-<<<<<<< HEAD
+  
+  // Display score/results along with button to play again
   $('#submit').click(
     function (e) {
       e.preventDefault();
@@ -103,97 +81,58 @@ app.submit = () => {
         ans = $(element).val();
         app.userAns.push(ans);
       });
-
+      
+      // Verify all questions have been answered
       if ($(app.userAns).length < 3) {
         alert('Please answer all the questions!')
       } else {
-
+        
+        // When user clicks submit, check user answers against correct answers
         let correctAns = 0;
         for (var i = 0; i < app.userAns.length; i++) {
 
           if (app.userAns[i] === app.answer[i]) {
-            console.log(`${app.userAns[i]} is correct!`);
+            $('#answers').append(`<p>${app.userAns[i]} is correct!</p>`);
             correctAns = correctAns + 1;
           }
           else if (app.userAns[i] != app.answer[i]) {
-            console.log(`${app.userAns[i]} is incorrect. The correct answer was ${app.answer[i]}`)
+            $('#answers').append(`<p>${app.userAns[i]} is incorrect. The correct answer was ${app.answer[i]}</p>`);
           }
 
         }
 
+        // If user gets most questions right, they pass. If not they fail.
         if (correctAns >= 2) {
-          console.log('You win!')
+          $('#win').html('<h2>You win!</h2>')
         }
+        else {
+          $('#win').html('<h2>You Lose!</h2>')
+        }
+        
       }
-
-
-
-
-      // console.log(app.userAns);
-      // console.log(app.answer);
     }
   )
-
 }
 
-
-
-
-=======
-$('#submit').click(
-  function (e) {  
-    e.preventDefault();
-       const checked = $('form input[type=radio]:checked').each(function(index, element){ 
-   ans = $(element).val();
-   app.userAns.push(ans);
-	   });
-		
-		if ($(app.userAns).length < 3) {
-		alert('Please answer all the questions!')
-		} else {
-		
-			let correctAns = 0;
-    for (var i = 0; i < app.userAns.length; i++) {
-      
-        if (app.userAns[i] === app.answer[i]) {
-          console.log(`${app.userAns[i]} is correct!`);
-          correctAns = correctAns + 1;
-        }
-      else if (app.userAns[i] != app.answer[i]){
-          console.log(`${app.userAns[i]} is incorrect. The correct answer was ${app.answer[i]}`)
-      }
-
-	}
-		
-		if (correctAns >= 2) {
-			console.log('You win!')
-		}
-	}
-     
-    
-    	
-		
-		// console.log(app.userAns);
-		// console.log(app.answer);
-  }
-  )
-
+// When user clicks Play Again, reload the game.
+app.playAgain = () => {
+  $('#playAgain').click(function () {
+    location.reload();
+  });
 }
-  
 
+// When user clicks Start Game, start the game.
+app.startGame = () =>{ $("#startGame").one('click', function () {
+  app.getQuestions();
+  $('#intro').hide();
+})
+}
 
-    
->>>>>>> master
-
-// Display score/results along with button to play again
 // Start app
 app.init = function () {
-  app.startGame = $("#startGame").one('click', function () {
-    app.getQuestions();
-    $('#intro').hide();
-    $('#submit').show();
-  })
+  app.startGame();
   app.submit();
+  app.playAgain();
 };
 
 // Document ready
