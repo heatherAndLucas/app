@@ -16,12 +16,13 @@ app.getQuestions = () => {
     }).then((result) => {
 
 				let questionsArray = result.results;
-				console.log(result)
 				
 			app.displayQuestions(questionsArray);
 
     })
 }
+
+app.answer = []
 
 // Display questions to user
 // Randomly display options of correct and incorrect answers to user
@@ -30,6 +31,7 @@ app.displayQuestions = (questionsArray) => {
         const question = quest.question;
 
         const answer = quest.correct_answer;
+        app.answer.unshift(answer);
 
         const wAnswers = quest.incorrect_answers;
 
@@ -47,7 +49,7 @@ app.displayQuestions = (questionsArray) => {
         }
         const shuffArray = shuffle(options);
 
-        console.log(question, options);
+        
 
         const oneQuestion = `
 	          <fieldset>
@@ -76,14 +78,40 @@ app.displayQuestions = (questionsArray) => {
 
 // When user clicks submit, check user answers against correct answers
 // Verify all questions have been answered
+app.userAns = [];
 
 app.submit = () => {
 
 $('#submit').click(
   function (e) {
     e.preventDefault();
-    const checked = $('form input[type=radio]:checked').val();
-    console.log(checked);
+    const checked = $('form input[type=radio]:checked').each(function(index, element){ 
+      ans = $(element).val();
+      app.userAns.push(ans);
+    });
+   
+    if ($(app.userAns).length < 3) {
+      alert('Please answer all the questions!')
+    } else {
+
+      let correctAns = 0;
+      for (var i = 0; i < app.userAns.length; i++) {
+
+        if (app.userAns[i] === app.answer[i]) {
+          console.log(`${app.userAns[i]} is correct!`);
+          correctAns = correctAns + 1;
+        }
+        else if(app.userAns[i] != app.answer[i]){
+          console.log(`${app.userAns[i]} is incorrect. The correct answer was ${app.answer[i]}`)
+        }
+
+      }
+
+      if (correctAns >= 2) {
+        console.log('You win!')
+      }
+    }
+
   }
 )
 
