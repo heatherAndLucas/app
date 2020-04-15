@@ -15,7 +15,13 @@ app.getQuestions = () => {
     }
   }).then((result) => {
 
+<<<<<<< HEAD
     let questionsArray = result.results;
+=======
+				let questionsArray = result.results;
+				
+			app.displayQuestions(questionsArray);
+>>>>>>> master
 
     app.displayQuestions(questionsArray);
 
@@ -27,8 +33,16 @@ app.answer = []
 // Display questions to user
 // Randomly display options of correct and incorrect answers to user
 app.displayQuestions = (questionsArray) => {
+<<<<<<< HEAD
   questionsArray.forEach((quest) => {
     const question = quest.question;
+=======
+	questionsArray.forEach((quest) => {
+        const question = quest.question;
+
+        const answer = quest.correct_answer;
+        app.answer.unshift(answer);
+>>>>>>> master
 
     const answer = quest.correct_answer;
     app.answer.unshift(answer);
@@ -37,6 +51,7 @@ app.displayQuestions = (questionsArray) => {
 
     const options = [answer, ...wAnswers];
 
+<<<<<<< HEAD
     function shuffle(a) {
       var j, x, i;
       for (i = a.length - 1; i > 0; i--) {
@@ -50,6 +65,9 @@ app.displayQuestions = (questionsArray) => {
     const shuffArray = shuffle(options);
 
     const oneQuestion = `
+=======
+        const oneQuestion = `
+>>>>>>> master
 	          <fieldset>
               <legend>${question}</legend>
               <label for="option1">${shuffArray[0]}</label>
@@ -77,6 +95,7 @@ app.userAns = [];
 
 app.submit = () => {
 
+<<<<<<< HEAD
   $('#submit').click(
     function (e) {
       e.preventDefault();
@@ -120,6 +139,51 @@ app.submit = () => {
 
 
 
+=======
+$('#submit').click(
+  function (e) {  
+    e.preventDefault();
+       const checked = $('form input[type=radio]:checked').each(function(index, element){ 
+   ans = $(element).val();
+   app.userAns.push(ans);
+	   });
+		
+		if ($(app.userAns).length < 3) {
+		alert('Please answer all the questions!')
+		} else {
+		
+			let correctAns = 0;
+    for (var i = 0; i < app.userAns.length; i++) {
+      
+        if (app.userAns[i] === app.answer[i]) {
+          console.log(`${app.userAns[i]} is correct!`);
+          correctAns = correctAns + 1;
+        }
+      else if (app.userAns[i] != app.answer[i]){
+          console.log(`${app.userAns[i]} is incorrect. The correct answer was ${app.answer[i]}`)
+      }
+
+	}
+		
+		if (correctAns >= 2) {
+			console.log('You win!')
+		}
+	}
+     
+    
+    	
+		
+		// console.log(app.userAns);
+		// console.log(app.answer);
+  }
+  )
+
+}
+  
+
+
+    
+>>>>>>> master
 
 // Display score/results along with button to play again
 // Start app
