@@ -66,13 +66,13 @@ app.displayQuestions = (questionsArray) => {
     const oneQuestion = `
 	          <fieldset>
               <legend>${question}</legend>
-              <label for="option1">${shuffArray[0]}</label>
+              <label for="${shuffArray[0]}">${shuffArray[0]}</label>
               <input type="radio" name="${question}" value="${shuffArray[0]}" id="option1">
-              <label for="option2">${shuffArray[1]}</label>
+              <label for="${shuffArray[1]}">${shuffArray[1]}</label>
               <input type="radio" name="${question}" value="${shuffArray[1]}" id="option2">
-              <label for="option3">${shuffArray[2]}</label>
+              <label for="${shuffArray[2]}">${shuffArray[2]}</label>
               <input type="radio" name="${question}" value="${shuffArray[2]}" id="option3">
-              <label for="option4">${shuffArray[3]}</label>
+              <label for="${shuffArray[3]}">${shuffArray[3]}</label>
               <input type="radio" name="${question}" value="${shuffArray[3]}" id="option4">
             </fieldset>
         `
