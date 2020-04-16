@@ -1,19 +1,17 @@
 // Create app namespace to hold all methods
 const app = {};
 
-// when a category button is clicked we want to take the id put it in category number variable then run get questions for that category 
+// when a category button is clicked we want to take the id put it in category number variable then run get questions for that category
 let catNumber = [];
 
-
 app.displayCategory = () => {
-  $('.catChoice').click(function(){
+  $(".catChoice").click(function() {
     newNum = this.id;
     catNumber.push(newNum);
     app.getQuestions();
-  })  
-}
-
-
+    $(this).attr("disabled", true);
+  });
+};
 
 // app.url = `https://opentdb.com/api.php?amount=3&category=${app.catNumber}&difficulty=easy&type=multiple`
 
@@ -21,34 +19,33 @@ app.displayCategory = () => {
 app.getQuestions = () => {
   $.ajax({
     url: `https://opentdb.com/api.php?amount=3&category=${catNumber}&difficulty=easy&type=multiple`,
-    method: 'GET',
-    dataType: 'json',
+    method: "GET",
+    dataType: "json",
     data: {
-      format: 'json',
-    }
+      format: "json",
+    },
   }).then((result) => {
-
     let questionsArray = result.results;
 
     app.displayQuestions(questionsArray);
+    app.submit();
+  });
+};
 
-  })
-}
-
-app.answer = []
+app.answer = [];
 
 // Display questions to user
 app.displayQuestions = (questionsArray) => {
   questionsArray.forEach((quest) => {
     const question = quest.question;
-    
+
     const answer = quest.correct_answer;
     app.answer.unshift(answer);
-    
+
     const wAnswers = quest.incorrect_answers;
-    
+
     const options = [answer, ...wAnswers];
-    
+
     // Randomly display options of correct and incorrect answers to user
     function shuffle(a) {
       var j, x, i;
@@ -75,86 +72,102 @@ app.displayQuestions = (questionsArray) => {
               <label for="${shuffArray[3]}">${shuffArray[3]}</label>
               <input type="radio" name="${question}" value="${shuffArray[3]}" id="option4">
             </fieldset>
-        `
-    $('form').prepend(oneQuestion);
-  })
-  $('#submit').show();
-}
-
+        `;
+    $("form").prepend(oneQuestion);
+  });
+  $("#myForm").append('<button id="submit" class="submit">Submit!</button>');
+};
 
 app.userAns = [];
 
 app.submit = () => {
-  
   // Display score/results along with button to play again
-  $('#submit').click(
-    function (e) {
-      e.preventDefault();
-      const checked = $('form input[type=radio]:checked').each(function (index, element) {
-        ans = $(element).val();
-        app.userAns.push(ans);
-      });
-      
-      // Verify all questions have been answered
-      if ($(app.userAns).length < 3) {
-        alert('Please answer all the questions!')
+  $("#submit").click(function(e) {
+    e.preventDefault();
+    const checked = $("form input[type=radio]:checked").each(function(
+      index,
+      element
+    ) {
+      ans = $(element).val();
+      app.userAns.push(ans);
+    });
+
+    // Verify all questions have been answered
+    if ($(app.userAns).length < 3) {
+      alert("Please answer all the questions!");
+    } else {
+      $(".modal").addClass("active");
+      $(".modalOverlay").addClass("active");
+
+      if ($(".catChoice:disabled").length === 6) {
+        $("#finalResult").show();
+        $("#playAgain").hide();
       } else {
+        $("#playAgain").show();
+      }
 
-        $('.modal').addClass("active");
-        $('.modalOverlay').addClass("active");
-        $('#playAgain').show();
-        
-        // When user clicks submit, check user answers against correct answers
-        let correctAns = 0;
-        for (var i = 0; i < app.userAns.length; i++) {
-
-          if (app.userAns[i] === app.answer[i]) {
-            $('#answers').append(`<p>${app.userAns[i]} is correct!</p>`);
-            correctAns = correctAns + 1;
-          }
-          else if (app.userAns[i] != app.answer[i]) {
-            $('#answers').append(`<p>${app.userAns[i]} is incorrect. The correct answer was ${app.answer[i]}</p>`);
-          }
-
+      // When user clicks submit, check user answers against correct answers
+      let correctAns = 0;
+      for (var i = 0; i < app.userAns.length; i++) {
+        if (app.userAns[i] === app.answer[i]) {
+          $("#answers").append(`<p>${app.userAns[i]} is correct!</p>`);
+          correctAns = correctAns + 1;
+        } else if (app.userAns[i] != app.answer[i]) {
+          $("#answers").append(
+            `<p>${app.userAns[i]} is incorrect. The correct answer was ${app.answer[i]}</p>`
+          );
         }
+      }
 
-        // If user gets most questions right, they pass. If not they fail.
-        if (correctAns >= 2) {
-          $('#win').html('<h2>You win!</h2>')
-        }
-        else {
-          $('#win').html('<h2>You Lose!</h2>')
-        }
-        
+      // If user gets most questions right, they pass. If not they fail.
+      if (correctAns >= 2) {
+        $("#win").html("<h2>You win this category!</h2>");
+        $(`#${catNumber}`).css("color", "green");
+        $(`#${catNumber}`).append(`<i class="fas fa-check"></i>`);
+      } else {
+        $("#win").html("<h2>You lose this category. Try another one!</h2>");
+        $(`#${catNumber}`).css("color", "red");
+        $(`#${catNumber}`).append(`<i class="fas fa-times"></i>`);
       }
     }
-  )
+  });
   app.playAgain();
-}
+};
 
 // When user clicks Play Again, reload the game.
 app.playAgain = () => {
-  $('#playAgain').click(function () {
-    location.reload();
+  $("#playAgain").click(function() {
+    $(".modal").removeClass("active");
+    $(".modalOverlay").removeClass("active");
+
+    // clearing questions and catNumber
+    $("#myForm").html("");
+    catNumber = [];
+
+    $("#answers").html("");
+    app.userAns = [];
+    app.answer = [];
+    // location.reload();
   });
-}
+};
 
 // When user clicks Start Game, start the game.
-app.startGame = () =>{ $("#startGame").one('click', function () {
-  $('#categories').show();
-  app.displayCategory();
-  $('#intro').hide();
-})
-}
+app.startGame = () => {
+  $("#startGame").one("click", function() {
+    $("#categories").show();
+    app.displayCategory();
+    $("#intro").hide();
+  });
+};
 
 // Start app
-app.init = function () {
+app.init = function() {
   app.startGame();
-  app.submit();
+  // app.submit();
   // app.playAgain();
 };
 
 // Document ready
-$(function () {
+$(function() {
   app.init();
 });

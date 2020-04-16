@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://kit.fontawesome.com/6d54e0ab0d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
-    <h1>Trivial Pursuit</h1>
+    <h1 id="cats">Trivial Pursuit</h1>
     <section id="intro">
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus, quam quibusdam. Voluptatum perspiciatis maiores repellendus fuga esse similique reprehenderit accusamus pariatur vel impedit repudiandae quaerat, assumenda iusto quidem ipsa praesentium fugiat alias est ipsum nesciunt eveniet blanditiis? Atque non debitis animi dolor cupiditate necessitatibus quia dicta, suscipit nisi reiciendis adipisci.</p>
     <button id="startGame">Start Game</button>
     </section>
     <section class="categories" id="categories">
+        <h2>Choose a category!</h2>
         <ul>
             <li><button class="catChoice" id="10">Arts & Literature</button></li>
             <li><button class="catChoice" id="17">Science & Nature</button></li>
@@ -24,9 +26,9 @@
 
     </section>
     <section id="questions">
-        <form action="#" method="#" class="myForm" name="myForm">
+        <form action="#" method="#" class="myForm" name="myForm" id="myForm">
 
-            <button id="submit" class="submit">Submit!</button>
+            <!-- <button id="submit" class="submit">Submit!</button> -->
         </form>
     </section>
 
@@ -40,7 +42,8 @@
             <div id="answers">
 
             </div>
-            <button id="playAgain" class="playAgain">Play Again!</button>
+            <button id="playAgain" class="playAgain">Pick Another Category!</button>
+            <button id="finalResult" class="finalResult">See Final Results!</button>
         </div>
     </div>
     <div class="modalOverlay">
