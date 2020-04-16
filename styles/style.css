@@ -235,6 +235,6 @@ html {
   overflow: hidden;
 }
 
-.submit {
+.categories, .submit {
   display: none;
 }
