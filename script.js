@@ -99,6 +99,8 @@ app.submit = () => {
       if ($(app.userAns).length < 3) {
         alert('Please answer all the questions!')
       } else {
+
+        $('#playAgain').show();
         
         // When user clicks submit, check user answers against correct answers
         let correctAns = 0;
