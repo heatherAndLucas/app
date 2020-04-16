@@ -235,6 +235,12 @@ html {
   overflow: hidden;
 }
 
-.categories, .submit {
+.categories,
+.submit,
+.playAgain {
   display: none;
+}
+
+li {
+  list-style: none;
 }
