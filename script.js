@@ -100,6 +100,8 @@ app.submit = () => {
         alert('Please answer all the questions!')
       } else {
 
+        $('.modal').addClass("active");
+        $('.modalOverlay').addClass("active");
         $('#playAgain').show();
         
         // When user clicks submit, check user answers against correct answers
