@@ -1,13 +1,26 @@
 // Create app namespace to hold all methods
 const app = {};
 
+// when a category button is clicked we want to take the id put it in category number variable then run get questions for that category 
+let catNumber = [];
 
-app.url = `https://opentdb.com/api.php?amount=3&category=11&difficulty=easy&type=multiple`
+
+app.displayCategory = () => {
+  $('.catChoice').click(function(){
+    newNum = this.id;
+    catNumber.push(newNum);
+    app.getQuestions();
+  })  
+}
+
+
+
+// app.url = `https://opentdb.com/api.php?amount=3&category=${app.catNumber}&difficulty=easy&type=multiple`
 
 // When user clicks the start button, make AJAX request to get questions/answers
 app.getQuestions = () => {
   $.ajax({
-    url: app.url,
+    url: `https://opentdb.com/api.php?amount=3&category=${catNumber}&difficulty=easy&type=multiple`,
     method: 'GET',
     dataType: 'json',
     data: {
@@ -112,6 +125,7 @@ app.submit = () => {
       }
     }
   )
+  app.playAgain();
 }
 
 // When user clicks Play Again, reload the game.
@@ -123,7 +137,8 @@ app.playAgain = () => {
 
 // When user clicks Start Game, start the game.
 app.startGame = () =>{ $("#startGame").one('click', function () {
-  app.getQuestions();
+  $('#categories').show();
+  app.displayCategory();
   $('#intro').hide();
 })
 }
@@ -132,7 +147,7 @@ app.startGame = () =>{ $("#startGame").one('click', function () {
 app.init = function () {
   app.startGame();
   app.submit();
-  app.playAgain();
+  // app.playAgain();
 };
 
 // Document ready
