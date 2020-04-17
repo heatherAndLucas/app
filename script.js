@@ -8,6 +8,7 @@ app.displayCategory = () => {
   $(".catChoice").click(function() {
     newNum = this.id;
     catNumber.push(newNum);
+    app.chooseDifficulty();
     app.getQuestions();
     $(this).attr("disabled", true);
   });
@@ -198,7 +199,7 @@ app.startGame = () => {
 // Start app
 app.init = function() {
   app.startGame();
-  app.chooseDifficulty();
+  // app.chooseDifficulty();
   // app.submit();
   // app.playAgain();
 };
