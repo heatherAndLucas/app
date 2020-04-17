@@ -11,7 +11,20 @@
     <h1 id="cats">Trivial Pursuit</h1>
     <section id="intro">
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus, quam quibusdam. Voluptatum perspiciatis maiores repellendus fuga esse similique reprehenderit accusamus pariatur vel impedit repudiandae quaerat, assumenda iusto quidem ipsa praesentium fugiat alias est ipsum nesciunt eveniet blanditiis? Atque non debitis animi dolor cupiditate necessitatibus quia dicta, suscipit nisi reiciendis adipisci.</p>
-    <button id="startGame">Start Game</button>
+    <section class="difficultyFormSection">
+      <form action="#" id="difficultyForm">
+        <fieldset>
+            <legend>Difficulty</legend>
+          <label for="easy">Easy</label>
+          <input type="radio" name="difficulty" id="easy" value="easy" required>
+          <label for="medium">Medium</label>
+          <input type="radio" name="difficulty" id="medium" value="medium" required>
+          <label for="hard">Hard</label>
+          <input type="radio" name="difficulty" id="hard" value="hard" required>
+        </fieldset>
+      </form>
+    </section>
+    <button id="startGame" class="startGame">Start Game</button>
     </section>
     <section class="categories" id="categories">
         <h2>Choose a category!</h2>
@@ -26,7 +39,7 @@
 
     </section>
     <section id="questions">
-        <form action="#" method="#" class="myForm" name="myForm" id="myForm">
+        <form action="#" method="#" class="questionsForm" name="questionsForm" id="questionsForm">
 
             <!-- <button id="submit" class="submit">Submit!</button> -->
         </form>
