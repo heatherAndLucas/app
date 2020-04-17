@@ -117,12 +117,12 @@ app.submit = () => {
       // When user clicks submit, check user answers against correct answers
       let correctAns = 0;
       for (var i = 0; i < app.userAns.length; i++) {
-        if (app.userAns[i] === app.answer[i]) {
+        if (app.userAns[i].replace(/[^a-zA-Z0-9]+/g, "") === app.answer[i].replace(/&.*?;/gi, '').replace(/[^a-zA-Z0-9]+/g, "")) {
           $("#answers").append(`<p>${app.userAns[i]} is correct!</p>`);
           correctAns = correctAns + 1;
         } else if (app.userAns[i] != app.answer[i]) {
           $("#answers").append(
-            `<p>${app.userAns[i]} is incorrect. The correct answer was ${app.answer[i]}</p>`
+            `<p>${app.userAns[i]} is incorrect. The correct answer was ${app.answer[i]}.</p>`
           );
         }
       }
