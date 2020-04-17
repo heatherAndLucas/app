@@ -102,6 +102,7 @@ app.submit = () => {
       if ($(".catChoice:disabled").length === 6) {
         $("#finalResult").show();
         $("#playAgain").hide();
+        app.finalResults();
       } else {
         $("#playAgain").show();
       }
@@ -123,6 +124,7 @@ app.submit = () => {
       if (correctAns >= 2) {
         $("#win").html("<h2>You win this category!</h2>");
         $(`#${catNumber}`).css("color", "green");
+        $(`#${catNumber}`).addClass("correct");
         $(`#${catNumber}`).append(`<i class="fas fa-check"></i>`);
       } else {
         $("#win").html("<h2>You lose this category. Try another one!</h2>");
@@ -147,9 +149,40 @@ app.playAgain = () => {
     $("#answers").html("");
     app.userAns = [];
     app.answer = [];
-    // location.reload();
   });
 };
+
+app.finalResults = () => {
+
+  $("#finalResult").click(function () {
+  $(".modal").removeClass("active");
+  $(".modalOverlay").removeClass("active");
+  $("#myForm").html("");
+  $(".categories").hide();
+
+    let numCorrect = $(".correct").length;
+  if(numCorrect > 3){
+    $('#resultsContainer').html(
+      `<h2>You Win!</h2>
+        <p> You got ${numCorrect}/6 categories correct!</p>
+        <button id="newGame">New Game</button>
+      `
+    )
+  }else{
+    $('#resultsContainer').html(
+      `<h2>You Lose!</h2>
+        <p> You only got ${numCorrect}/6 categories correct.</p>
+        <button id="newGame">New Game</button>
+      `)
+  }
+  $("#newGame").click(function(){
+    location.reload();
+  })
+
+  });
+}
+
+
 
 // When user clicks Start Game, start the game.
 app.startGame = () => {
