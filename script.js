@@ -18,6 +18,7 @@ let difficulty = [];
 
 app.chooseDifficulty = () => {
   let userDifficulty = $("#difficultyForm input[type=radio]:checked").val();
+  difficulty = [];
   difficulty.push(userDifficulty);
 };
 
@@ -133,7 +134,7 @@ app.submit = () => {
         $(`#${catNumber}`).addClass("correct");
         $(`#${catNumber}`).append(`<i class="fas fa-check"></i>`);
       } else {
-        $("#win").html("<h2>You lose this category. Try another one!</h2>");
+        $("#win").html("<h2>You lose this category.</h2>");
         $(`#${catNumber}`).css("color", "red");
         $(`#${catNumber}`).append(`<i class="fas fa-times"></i>`);
       }
