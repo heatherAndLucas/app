@@ -8,63 +8,70 @@
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
-    <h1 id="cats">Trivial Pursuit</h1>
-    <section id="intro">
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus, quam quibusdam. Voluptatum perspiciatis maiores repellendus fuga esse similique reprehenderit accusamus pariatur vel impedit repudiandae quaerat, assumenda iusto quidem ipsa praesentium fugiat alias est ipsum nesciunt eveniet blanditiis? Atque non debitis animi dolor cupiditate necessitatibus quia dicta, suscipit nisi reiciendis adipisci.</p>
-    <section class="difficultyFormSection">
-      <form action="#" id="difficultyForm">
-        <fieldset>
-            <legend>Difficulty</legend>
-          <label for="easy">Easy</label>
-          <input type="radio" name="difficulty" id="easy" value="easy" required>
-          <label for="medium">Medium</label>
-          <input type="radio" name="difficulty" id="medium" value="medium" required>
-          <label for="hard">Hard</label>
-          <input type="radio" name="difficulty" id="hard" value="hard" required>
-        </fieldset>
-      </form>
-    </section>
-    <button id="startGame" class="startGame">Start Game</button>
-    </section>
-    <section class="categories" id="categories">
-        <h2>Choose a category!</h2>
-        <ul>
-            <li><button class="catChoice" id="10">Arts & Literature</button></li>
-            <li><button class="catChoice" id="17">Science & Nature</button></li>
-            <li><button class="catChoice" id="21">Sports</button></li>
-            <li><button class="catChoice" id="11">Entertainment</button></li>
-            <li><button class="catChoice" id="22">Geography</button></li>
-            <li><button class="catChoice" id="23">History</button></li>
-        </ul>
+    <header>
+        <h1 id="cats">Trivia Quest</h1>
+    </header>
+    <main>
+        <section id="intro">
+        <p>This game is similar to but completely different from Trivial Pursuit. Choose your difficulty level and try to score in all six categories!</p>
+        <section class="difficultyFormSection">
+            <form action="#" id="difficultyForm">
+            <fieldset>
+                <legend>Difficulty:</legend>
+                <label for="easy">Easy</label>
+                <input type="radio" name="difficulty" id="easy" value="easy" required>
+                <label for="medium">Medium</label>
+                <input type="radio" name="difficulty" id="medium" value="medium" required>
+                <label for="hard">Hard</label>
+                <input type="radio" name="difficulty" id="hard" value="hard" required>
+            </fieldset>
+            </form>
+        </section>
+        <button id="startGame" class="startGame">Start Game</button>
+        </section>
+        <section class="categories" id="categories">
+            <h2>Choose a category!</h2>
+            <ul>
+                <li><button class="catChoice" id="10">Arts & Literature</button></li>
+                <li><button class="catChoice" id="17">Science & Nature</button></li>
+                <li><button class="catChoice" id="21">Sports</button></li>
+                <li><button class="catChoice" id="11">Entertainment</button></li>
+                <li><button class="catChoice" id="22">Geography</button></li>
+                <li><button class="catChoice" id="23">History</button></li>
+            </ul>
 
-    </section>
-    <section id="questions">
-        <form action="#" method="#" class="questionsForm" name="questionsForm" id="questionsForm">
+        </section>
+        <section id="questions">
+            <form action="#" method="#" class="questionsForm" name="questionsForm" id="questionsForm">
 
-            <!-- <button id="submit" class="submit">Submit!</button> -->
-        </form>
-    </section>
-    <section id="resultsContainer">
-        
-    </section>
+                <!-- <button id="submit" class="submit">Submit!</button> -->
+            </form>
+        </section>
+        <section id="resultsContainer">
+            
+        </section>
 
-    <!-- Modal -->
-    <div class="modal">
-        <!-- The modal content -->
-        <div class="modalContent">
-            <div id="win">
+        <!-- Modal -->
+        <div class="modal">
+            <!-- The modal content -->
+            <div class="modalContent">
+                <div id="win">
 
+                </div>
+                <div id="answers">
+
+                </div>
+                <button id="playAgain" class="playAgain">Pick Another Category!</button>
+                <button id="finalResult" class="finalResult">See Final Results!</button>
             </div>
-            <div id="answers">
-
-            </div>
-            <button id="playAgain" class="playAgain">Pick Another Category!</button>
-            <button id="finalResult" class="finalResult">See Final Results!</button>
         </div>
-    </div>
-    <div class="modalOverlay">
-    </div>
-
+        <div class="modalOverlay">
+        </div>
+    </main>
+    <footer>
+        <p>Built by Heather Andreadis and Lucas Silbernagel</p>
+        <p>Data provided by <a href="https://opentdb.com/" target="_blank">https://opentdb.com/</a></p>
+    </footer>
     <script src='https://code.jquery.com/jquery-3.4.0.min.js' integrity='sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=' crossorigin='anonymous'></script>
     <script src="script.js"></script>
 </body>
