@@ -189,10 +189,14 @@ app.finalResults = () => {
 
 // When user clicks Start Game, start the game.
 app.startGame = () => {
-  $("#startGame").one("click", function() {
-    $("#categories").show();
-    app.displayCategory();
-    $("#intro").hide();
+  $("#startGame").on("click", function () {
+    if ($("#difficultyForm input[type=radio]").is(":checked")) {
+      $("#categories").show();
+      app.displayCategory();
+      $("#intro").hide();
+    } else {
+      alert('Please choose a difficulty level!')
+    }
   });
 };
 
