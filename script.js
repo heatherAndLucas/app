@@ -8,6 +8,7 @@ app.displayCategory = () => {
   $(".catChoice").click(function() {
     newNum = this.id;
     catNumber.push(newNum);
+    app.chooseDifficulty();
     app.getQuestions();
     $(this).attr("disabled", true);
   });
@@ -17,6 +18,7 @@ let difficulty = [];
 
 app.chooseDifficulty = () => {
   let userDifficulty = $("#difficultyForm input[type=radio]:checked").val();
+  difficulty = [];
   difficulty.push(userDifficulty);
 };
 
@@ -132,7 +134,7 @@ app.submit = () => {
         $(`#${catNumber}`).addClass("correct");
         $(`#${catNumber}`).append(`<i class="fas fa-check"></i>`);
       } else {
-        $("#win").html("<h2>You lose this category. Try another one!</h2>");
+        $("#win").html("<h2>You lose this category.</h2>");
         $(`#${catNumber}`).css("color", "red");
         $(`#${catNumber}`).append(`<i class="fas fa-times"></i>`);
       }
@@ -188,17 +190,21 @@ app.finalResults = () => {
 
 // When user clicks Start Game, start the game.
 app.startGame = () => {
-  $("#startGame").one("click", function() {
-    $("#categories").show();
-    app.displayCategory();
-    $("#intro").hide();
+  $("#startGame").on("click", function () {
+    if ($("#difficultyForm input[type=radio]").is(":checked")) {
+      $("#categories").show();
+      app.displayCategory();
+      $("#intro").hide();
+    } else {
+      alert('Please choose a difficulty level!')
+    }
   });
 };
 
 // Start app
 app.init = function() {
   app.startGame();
-  app.chooseDifficulty();
+  // app.chooseDifficulty();
   // app.submit();
   // app.playAgain();
 };
