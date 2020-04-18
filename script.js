@@ -10,6 +10,7 @@ app.displayCategory = () => {
     catNumber.push(newNum);
     app.getQuestions();
     $(this).attr("disabled", true);
+    $('#categories').hide();
   });
 };
 
@@ -153,6 +154,8 @@ app.playAgain = () => {
   $("#playAgain").click(function() {
     $(".modal").removeClass("active");
     $(".modalOverlay").removeClass("active");
+
+    $("#categories").show();
 
     $("#questionsForm").html("");
     $("#answers").html("");
