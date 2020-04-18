@@ -90,14 +90,14 @@ app.displayQuestions = (questionsArray) => {
     const oneQuestion = `
 	          <fieldset>
               <legend>${question}</legend>
-              <label for="${shuffArray[0]}">${shuffArray[0]}</label>
               <input type="radio" name="${question}" value="${shuffArray[0]}" id="${shuffArray[0]}">
-              <label for="${shuffArray[1]}">${shuffArray[1]}</label>
+              <label for="${shuffArray[0]}">${shuffArray[0]}</label>
               <input type="radio" name="${question}" value="${shuffArray[1]}" id="${shuffArray[1]}">
-              <label for="${shuffArray[2]}">${shuffArray[2]}</label>
+              <label for="${shuffArray[1]}">${shuffArray[1]}</label>
               <input type="radio" name="${question}" value="${shuffArray[2]}" id="${shuffArray[2]}">
-              <label for="${shuffArray[3]}">${shuffArray[3]}</label>
+              <label for="${shuffArray[2]}">${shuffArray[2]}</label>
               <input type="radio" name="${question}" value="${shuffArray[3]}" id="${shuffArray[3]}">
+              <label for="${shuffArray[3]}">${shuffArray[3]}</label>
             </fieldset>
         `;
     $("#questionsForm").prepend(oneQuestion);
@@ -121,6 +121,7 @@ app.submit = () => {
     // Verify all questions have been answered
     if ($(app.userAns).length < 3) {
       alert("Please answer all the questions!");
+      app.userAns = [];
     } else {
 
       // If all questions have been answered show category results modal
@@ -153,12 +154,12 @@ app.submit = () => {
       // If user gets most questions right, they pass. If not they fail. Displays message in modal, appends classes and icons to category depending on pass or fail.
       if (correctAns >= 2) {
         $("#win").html("<h2>You win this category!</h2>");
-        $(`#${catNumber}`).css("color", "green");
+        $(`#${catNumber}`).css("background", "green");
         $(`#${catNumber}`).addClass("correct");
         $(`#${catNumber}`).append(`<i class="fas fa-check"></i>`);
       } else {
         $("#win").html("<h2>You lose this category.</h2>");
-        $(`#${catNumber}`).css("color", "red");
+        $(`#${catNumber}`).css("background", "#c63f22");
         $(`#${catNumber}`).append(`<i class="fas fa-times"></i>`);
       }
     }
