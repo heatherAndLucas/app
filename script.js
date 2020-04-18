@@ -156,11 +156,11 @@ app.submit = () => {
         $("#win").html("<h2>You win this category!</h2>");
         $(`#${catNumber}`).css("background", "green");
         $(`#${catNumber}`).addClass("correct");
-        $(`#${catNumber}`).append(`<i class="fas fa-check"></i>`);
+        $(`#${catNumber}`).append(`<i class="fas fa-check" aria-label="pass"></i>`);
       } else {
         $("#win").html("<h2>You lose this category.</h2>");
         $(`#${catNumber}`).css("background", "#c63f22");
-        $(`#${catNumber}`).append(`<i class="fas fa-times"></i>`);
+        $(`#${catNumber}`).append(`<i class="fas fa-times" aria-label="fail"></i>`);
       }
     }
   });
