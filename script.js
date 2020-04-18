@@ -1,28 +1,28 @@
-// Create app namespace to hold all methods
+// Namespace to hold code
 const app = {};
 
-// when a category button is clicked we want to take the id put it in category number variable then run get questions for that category
+// When a category is clicked by the user, displays category clicked by pushing category value into variable which is then put into API, run in app.StartGame
 let catNumber = [];
 
 app.displayCategory = () => {
-  $(".catChoice").click(function() {
+  $(".catChoice").on( 'click', function() {
     newNum = this.id;
     catNumber.push(newNum);
-    app.chooseDifficulty();
     app.getQuestions();
     $(this).attr("disabled", true);
   });
 };
 
+// User selects difficulty level which is then stored into variable which is then put into API, run in app.startGame
 let difficulty = [];
 
 app.chooseDifficulty = () => {
   let userDifficulty = $("#difficultyForm input[type=radio]:checked").val();
-  difficulty = [];
   difficulty.push(userDifficulty);
 };
 
-// When user clicks the start button, make AJAX request to get questions/answers
+
+// Gets data by running AJAX request with selected category and difficulty, stores results in questionsArray run in app.displayCategory
 app.getQuestions = () => {
   $.ajax({
     url: `https://opentdb.com/api.php?amount=3&category=${catNumber}&difficulty=${difficulty}&type=multiple`,
@@ -39,9 +39,9 @@ app.getQuestions = () => {
   });
 };
 
+// For each of the 3 questions takes data stored in questionsArray and stores needed data in variables in order to put question on the page with the 4 answer options randomly displayed. Run in app.getQuestions
 app.answer = [];
 
-// Display questions to user
 app.displayQuestions = (questionsArray) => {
   questionsArray.forEach((quest) => {
     const question = quest.question;
@@ -53,7 +53,7 @@ app.displayQuestions = (questionsArray) => {
 
     const options = [answer, ...wAnswers];
 
-    // Randomly display options of correct and incorrect answers to user
+    // Randomly display options of correct and incorrect answers to user, using Durstenfeld's algorithm 
     function shuffle(a) {
       var j, x, i;
       for (i = a.length - 1; i > 0; i--) {
@@ -64,9 +64,10 @@ app.displayQuestions = (questionsArray) => {
       }
       return a;
     }
+
     const shuffArray = shuffle(options);
 
-    // Place question and answer options pulled from api and format for placement on page
+    // Post question saved in question and shuffled answer options onto page in formatted fieldset with radio input for answer options. 
     const oneQuestion = `
 	          <fieldset>
               <legend>${question}</legend>
@@ -85,16 +86,16 @@ app.displayQuestions = (questionsArray) => {
   $("#questionsForm").append('<button id="submit" class="submit">Submit!</button>');
 };
 
+
+// When user clicks submit button, run in app.getQuestions
 app.userAns = [];
 
 app.submit = () => {
-  // Display score/results along with button to play again
+
+  // On click answer options that were selected by user saved to array 
   $("#submit").click(function(e) {
     e.preventDefault();
-    const checked = $("#questionsForm input[type=radio]:checked").each(function(
-      index,
-      element
-    ) {
+    const checked = $("#questionsForm input[type=radio]:checked").each(function(index, element) {
       ans = $(element).val();
       app.userAns.push(ans);
     });
@@ -103,9 +104,12 @@ app.submit = () => {
     if ($(app.userAns).length < 3) {
       alert("Please answer all the questions!");
     } else {
+
+      // If all questions have been answered show category results modal
       $(".modal").addClass("active");
       $(".modalOverlay").addClass("active");
 
+      // If this is the last category show final results button in modal instead of playagain
       if ($(".catChoice:disabled").length === 6) {
         $("#finalResult").show();
         $("#playAgain").hide();
@@ -114,9 +118,10 @@ app.submit = () => {
         $("#playAgain").show();
       }
 
-      // When user clicks submit, check user answers against correct answers
+      // On click compare array of correct answers to array of user answers, display either correct or inccorrect statement in modal for each question.
       let correctAns = 0;
       for (var i = 0; i < app.userAns.length; i++) {
+        // Use regex to fix bug on answers with symbols in them not being recognized as correct. 
         if (app.userAns[i].replace(/[^a-zA-Z0-9]+/g, "") === app.answer[i].replace(/&.*?;/gi, '').replace(/[^a-zA-Z0-9]+/g, "")) {
           $("#answers").append(`<p>${app.userAns[i]} is correct!</p>`);
           correctAns = correctAns + 1;
@@ -127,7 +132,7 @@ app.submit = () => {
         }
       }
 
-      // If user gets most questions right, they pass. If not they fail.
+      // If user gets most questions right, they pass. If not they fail. Displays message in modal, appends classes and icons to category depending on pass or fail.
       if (correctAns >= 2) {
         $("#win").html("<h2>You win this category!</h2>");
         $(`#${catNumber}`).css("color", "green");
@@ -143,22 +148,22 @@ app.submit = () => {
   app.playAgain();
 };
 
-// When user clicks Play Again, reload the game.
+// When user clicks Play Again, remove modal, clear question and empty variables indicated, run in app.submit
 app.playAgain = () => {
   $("#playAgain").click(function() {
     $(".modal").removeClass("active");
     $(".modalOverlay").removeClass("active");
 
-    // clearing questions and catNumber
     $("#questionsForm").html("");
-    catNumber = [];
-
     $("#answers").html("");
+
+    catNumber = [];
     app.userAns = [];
     app.answer = [];
   });
 };
 
+// When user click final results button, modal is removed, questions and categories is cleared and message is displayed depending on how many categories are correct, executed in app.submit.
 app.finalResults = () => {
   $("#finalResult").click(function() {
     $(".modal").removeClass("active");
@@ -182,18 +187,20 @@ app.finalResults = () => {
       `
       );
     }
+    // Refreshes page when new game button is clicked.
     $("#newGame").click(function() {
       location.reload();
     });
   });
 };
 
-// When user clicks Start Game, start the game.
+// When user clicks Start Game does check to make sure difficulty level is selected. Then displays categories. Run in app.init.
 app.startGame = () => {
   $("#startGame").on("click", function () {
     if ($("#difficultyForm input[type=radio]").is(":checked")) {
       $("#categories").show();
       app.displayCategory();
+      app.chooseDifficulty();
       $("#intro").hide();
     } else {
       alert('Please choose a difficulty level!')
@@ -204,9 +211,6 @@ app.startGame = () => {
 // Start app
 app.init = function() {
   app.startGame();
-  // app.chooseDifficulty();
-  // app.submit();
-  // app.playAgain();
 };
 
 // Document ready
