@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Trivia Quest, a fun triva game">
+    <title>Trivia Quest</title>
     <script src="https://kit.fontawesome.com/6d54e0ab0d.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400|VT323&display=swap" rel="stylesheet">   
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
@@ -18,15 +20,15 @@
             <section id="intro">
             <p>This game is similar to but completely different from Trivial Pursuit. Choose your difficulty level and try to score in all six categories!</p>
             <section class="difficultyFormSection">
-                <form action="#" id="difficultyForm">
+                <form action="#" id="difficultyForm" class="difficultyForm">
                 <fieldset>
-                    <legend>Difficulty:</legend>
+                    <legend class="sr-only">Difficulty</legend>
                     <label for="easy">Easy</label>
-                    <input type="radio" name="difficulty" id="easy" value="easy" required>
+                    <input type="radio" name="difficulty" id="easy" value="easy">
                     <label for="medium">Medium</label>
-                    <input type="radio" name="difficulty" id="medium" value="medium" required>
+                    <input type="radio" name="difficulty" id="medium" value="medium">
                     <label for="hard">Hard</label>
-                    <input type="radio" name="difficulty" id="hard" value="hard" required>
+                    <input type="radio" name="difficulty" id="hard" value="hard">
                 </fieldset>
                 </form>
             </section>
@@ -35,25 +37,23 @@
             <section class="categories" id="categories">
                 <h2>Choose a category!</h2>
                 <ul>
-                    <li><button class="catChoice" id="10">Arts & Literature</button></li>
-                    <li><button class="catChoice" id="17">Science & Nature</button></li>
-                    <li><button class="catChoice" id="21">Sports</button></li>
-                    <li><button class="catChoice" id="11">Entertainment</button></li>
-                    <li><button class="catChoice" id="22">Geography</button></li>
-                    <li><button class="catChoice" id="23">History</button></li>
+                    <li><button class="catChoice art" id="10">Arts & Literature</button></li>
+                    <li><button class="catChoice science" id="17">Science & Nature</button></li>
+                    <li><button class="catChoice sports" id="21">Sports</button></li>
+                    <li><button class="catChoice entertainment" id="11">Entertainment</button></li>
+                    <li><button class="catChoice geography" id="22">Geography</button></li>
+                    <li><button class="catChoice history" id="23">History</button></li>
                 </ul>
-
             </section>
             <section id="questions">
                 <form action="#" method="#" class="questionsForm" name="questionsForm" id="questionsForm">
 
-                    <!-- <button id="submit" class="submit">Submit!</button> -->
                 </form>
             </section>
             <section id="resultsContainer">
                 
             </section>
-
+            
             <!-- Modal -->
             <div class="modal">
                 <!-- The modal content -->
@@ -74,7 +74,7 @@
     </main>
     <footer>
         <div class="wrapper">
-            <p>Built by Heather Andreadis and Lucas Silbernagel</p>
+            <p>By: Heather Andreadis & Lucas Silbernagel</p>
             <p>Data provided by <a href="https://opentdb.com/" target="_blank">https://opentdb.com/</a></p>
         </div>
     </footer>
