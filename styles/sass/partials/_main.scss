@@ -2,11 +2,13 @@ body {
     font-family: $ubuntu;
     font-weight: 300;
     background-color: $background;
+    color: $black;
 }
 
 h1,
 button,
-.modal h2 {
+.modal h2,
+.difficultyForm label {
     font-family: $robot;
 }
 
@@ -36,23 +38,23 @@ fieldset {
     margin-top: 60px;
 }
 
+.difficultyForm label,
+.startGame {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 1.5rem;
+}
+
 .difficultyForm label {
     margin-bottom: 10px;
     background: $label;
-    font-family: $robot;
     color: $white;
-    font-size: 1.5rem;
-    padding-top: 5px;
-    padding-bottom: 5px;
 }
 
 .startGame {
     display: block;
     margin: 0 auto;
     width: 70%;
-    font-size: 1.5rem;
-    padding-top: 5px;
-    padding-bottom: 5px;
 }
 
 button {
@@ -90,7 +92,7 @@ input {
 .categories,
 .finalResult, 
 .playAgain {
-    display:none;
+    display: none;
 }
 
 li {
@@ -116,49 +118,47 @@ footer a {
     color: $black;
 }
 
-  /* Modal styles begin */
+/* Modal styles begin */
+.modal {
+    visibility: hidden;
+    z-index: 20;
+    width: 50%;
+    height: 380px;
+    overflow: auto;
+    background: $white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    padding-bottom: 100px;
+}
 
-    .modal {
-        visibility: hidden;
-        z-index: 20;
-        width: 50%;
-        height: 380px;
-        overflow: auto;
-        background: #FFFFFF;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        position: fixed;
-        padding-bottom: 100px;
-    }
+.modal.active {
+    visibility: visible;
+    min-width: 356px;
+    animation-name: slidein;
+    animation-duration: 0.5s
+}
 
-    .modal.active {
-        visibility: visible;
-        min-width: 356px;
-        animation-name: slidein;
-        animation-duration: 0.5s
-    }
+/* Modal Animation */
+@keyframes slidein {
+    from {top: -800px; opacity: 0}
+    to {top: -900; opacity: 1}
+}
 
-  /* Modal Animation */
-    @keyframes slidein {
-        from {top: -800px; opacity: 0}
-        to {top: -900; opacity: 1}
-    }
+.modalOverlay {
+    width: 100%;
+    height: 100%;
+    background: $black;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 10;
+    opacity: 55%;
+    visibility: hidden;
+}
 
-    .modalOverlay {
-        width: 100%;
-        height: 100%;
-        background: #000000;
-        top: 0;
-        left: 0;
-        position: fixed;
-        z-index: 10;
-        opacity: 55%;
-        visibility: hidden;
-    }
-
-    .modalOverlay.active {
-        visibility: visible;
-    }
-
-  /* Modal styles end */
+.modalOverlay.active {
+    visibility: visible;
+}
+/* Modal styles end */
