@@ -20,13 +20,23 @@ a{
     color: black;
 }
 
-h1,h2,h3,h4,p{
+h1,h2,h3,h4,p, fieldset{
     margin: 0;
     padding: 0;
 }
 
+.categories,
+.finalResult, 
+.playAgain,
 input {
     display: none;
+}
+
+fieldset{
+    border: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 // Start Page 
@@ -45,22 +55,18 @@ button,
 
 h1 {
     text-align: center;
-    font-size: 3rem;
+    font-size: 3.5rem;
     padding-top: 70px;
-    padding-bottom: 30px;
+    padding-bottom: 55px;
 }
 
 p {
     line-height: 1.4;
     text-align: center;
+    font-size: 1.2rem;
 }
 
-fieldset {
-    border: none;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    padding: 0;
+.difficultyForm fieldset {
     margin-bottom: 50px;
     margin-top: 60px;
 }
@@ -70,6 +76,8 @@ fieldset {
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: 1.5rem;
+    border-radius: 3px;
+    box-shadow: 4px 4px 3px 1px rgba(0,0,0,0.32);
 }
 
 .difficultyForm label {
@@ -79,6 +87,12 @@ fieldset {
     color: $white;
     
 }
+.difficultyForm input[type="radio"]:checked+label, .difficultyForm label:focus{
+    background-color: lighten($label, 20%)
+}
+.difficultyForm label:active{
+    box-shadow: none;
+}
 
 .startGame {
     display: block;
@@ -86,10 +100,22 @@ fieldset {
     width: 70%;
 }
 
+.startGame:active{
+    background-color: darken($button, 20%);
+    box-shadow: none; 
+    color: $white;
+}
+
 button {
     background: $button;
     cursor: pointer;
+    border: none;
+    box-shadow: 4px 4px 3px 1px rgba(0,0,0,0.32);
 }
+button:active{
+    box-shadow: none; 
+}
+
 
 
 // categories 
@@ -117,22 +143,91 @@ button {
     background: $history;
 }
 
-.categories,
-.finalResult, 
-.playAgain {
-    display: none;
+.categories{
+    h2{
+        text-align: center;
+        padding-bottom: 40px;
+    }
+
+    ul{
+        text-align: center;
+    }
+
+    li{
+        margin-bottom: 20px;
+    }
+    button{
+        width: 280px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size: 1.5rem;
+        border-radius: 3px;
+    }
+
+    i{
+        padding-left: 10px;
+        font-size: 1.6rem;
+    }
+
 }
 
-
-
+// Questions
 .questions{
     margin-bottom: 50px;
+    fieldset{
+        margin-bottom: 40px;
+    }
+    legend{
+        font-weight: 400;
+        width: 100%;
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+        background: $button;
+        color: $black;
+        border-radius: 3px;
+        padding: 5px;
+        border: 2px solid $black;
+        font-family: $robot;
+    }
+    label{
+        margin-bottom: 5px;
+        width: 100%;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size: 1.1rem;
+        border-radius: 3px;
+        background: $white;
+        border: 2px solid $label;
+        cursor: pointer;
+    }
+    .questionsForm label:focus, .questionsForm label:hover{
+        background: $label;
+        color: $white;
+    }
+    .questionsForm input[type="radio"]:checked+label{
+        background: darken($label, 15%);
+        color: $white;
+    }
 }
 
 .submit{
     display: block;
     margin: 0 auto;
+    width: 70%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 1.5rem;
+    border-radius: 3px;
+    box-shadow: 4px 4px 3px 1px rgba(0,0,0,0.32);
 }
+.submit:active{
+    background-color: darken($button, 20%);
+    box-shadow: none; 
+    color: $white;
+}
+
+
+
 
 footer {
     width: 100%;
@@ -146,6 +241,7 @@ footer .wrapper {
 
 footer p {
     margin: 0 auto;
+    font-size: 1rem;
 }
 
 
@@ -156,19 +252,50 @@ footer p {
     visibility: hidden;
     z-index: 20;
     width: 50%;
-    height: 380px;
+    min-height: 320px;
     overflow: auto;
     background: $white;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     position: fixed;
-    padding-bottom: 100px;
+    padding: 30px 10px;
+    border: 5px solid $button;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+}
+
+.modal h2{
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal p{
+    line-height: 1.3;
+    margin-bottom: 15px;
+}
+
+.modal button{
+    margin: 0 auto;
+    width: 70%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 1.5rem;
+    border-radius: 3px;
+    box-shadow: 4px 4px 3px 1px rgba(0,0,0,0.32);
+}
+
+.modal button:active{
+    background-color: darken($button, 20%);
+    box-shadow: none; 
+    color: $white;
 }
 
 .modal.active {
     visibility: visible;
-    min-width: 356px;
+    min-width: 310px;
     animation-name: slidein;
     animation-duration: 0.5s
 }
@@ -195,3 +322,34 @@ footer p {
     visibility: visible;
 }
 /* Modal styles end */
+
+
+// Results 
+.resultsContainer{
+    h2{
+        font-family: $robot;
+        margin-bottom: 50px;
+        text-align:center;
+        font-size: 3.5rem;
+    }
+
+    p{
+        margin-bottom: 60px;
+    }
+
+    button{
+        display: block;
+        margin: 0 auto;
+        width: 70%;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size: 1.5rem;
+        border-radius: 3px;
+        box-shadow: 4px 4px 3px 1px rgba(0,0,0,0.32);
+    }
+    button:active{
+    background-color: darken($button, 20%);
+    box-shadow: none; 
+    color: $white;
+}
+}
