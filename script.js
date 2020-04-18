@@ -1,6 +1,33 @@
 // Namespace to hold code
 const app = {};
 
+// Start app
+app.init = function () {
+  app.startGame();
+};
+
+// User selects difficulty level which is then stored into variable which is then put into API, run in app.startGame
+let difficulty = [];
+
+app.chooseDifficulty = () => {
+  let userDifficulty = $("#difficultyForm input[type=radio]:checked").val();
+  difficulty.push(userDifficulty);
+};
+
+// When user clicks Start Game does check to make sure difficulty level is selected. Then displays categories. Run in app.init.
+app.startGame = () => {
+  $("#startGame").on("click", function () {
+    if ($("#difficultyForm input[type=radio]").is(":checked")) {
+      $("#categories").show();
+      app.displayCategory();
+      app.chooseDifficulty();
+      $("#intro").hide();
+    } else {
+      alert('Please choose a difficulty level!')
+    }
+  });
+};
+
 // When a category is clicked by the user, displays category clicked by pushing category value into variable which is then put into API, run in app.StartGame
 let catNumber = [];
 
@@ -13,15 +40,6 @@ app.displayCategory = () => {
     $('#categories').hide();
   });
 };
-
-// User selects difficulty level which is then stored into variable which is then put into API, run in app.startGame
-let difficulty = [];
-
-app.chooseDifficulty = () => {
-  let userDifficulty = $("#difficultyForm input[type=radio]:checked").val();
-  difficulty.push(userDifficulty);
-};
-
 
 // Gets data by running AJAX request with selected category and difficulty, stores results in questionsArray run in app.displayCategory
 app.getQuestions = () => {
@@ -92,7 +110,6 @@ app.displayQuestions = (questionsArray) => {
 app.userAns = [];
 
 app.submit = () => {
-
   // On click answer options that were selected by user saved to array 
   $("#submit").click(function(e) {
     e.preventDefault();
@@ -119,7 +136,7 @@ app.submit = () => {
         $("#playAgain").show();
       }
 
-      // On click compare array of correct answers to array of user answers, display either correct or inccorrect statement in modal for each question.
+      // Compare array of correct answers to array of user answers, display either correct or inccorrect statement in modal for each question.
       let correctAns = 0;
       for (var i = 0; i < app.userAns.length; i++) {
         // Use regex to fix bug on answers with symbols in them not being recognized as correct. 
@@ -195,25 +212,6 @@ app.finalResults = () => {
       location.reload();
     });
   });
-};
-
-// When user clicks Start Game does check to make sure difficulty level is selected. Then displays categories. Run in app.init.
-app.startGame = () => {
-  $("#startGame").on("click", function () {
-    if ($("#difficultyForm input[type=radio]").is(":checked")) {
-      $("#categories").show();
-      app.displayCategory();
-      app.chooseDifficulty();
-      $("#intro").hide();
-    } else {
-      alert('Please choose a difficulty level!')
-    }
-  });
-};
-
-// Start app
-app.init = function() {
-  app.startGame();
 };
 
 // Document ready
