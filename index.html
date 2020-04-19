@@ -25,7 +25,7 @@
                 <section class="difficultyFormSection">
                     <form action="#" id="difficultyForm" class="difficultyForm">
                         <fieldset>
-                            <legend class="sr-only">Difficulty</legend>
+                            <legend class="sr-only" aria-label="choose a level of difficulty for this game">Difficulty</legend>
                             <input type="radio" name="difficulty" id="easy" value="easy">
                             <label for="easy">Easy</label>
                             <input type="radio" name="difficulty" id="medium" value="medium">
@@ -49,7 +49,7 @@
                 </ul>
             </section>
             <section id="questions" class="questions">
-                <form action="#" method="#" class="questionsForm" name="questionsForm" id="questionsForm">
+                <form action="#" method="#" class="questionsForm" name="questionsForm" id="questionsForm" aria-label="Answer the three multiple choice questions on this page. Press control option space to select an answer for each question.">
 
                 </form>
             </section>
@@ -57,17 +57,17 @@
 
             </section>
             <!-- Modal  -->
-            <div class="modal">
+            <div class="modal" tabindex="0">
                 <!-- The modal content -->
                 <div class="modalContent">
-                    <div id="win">
+                    <div id="win" tabindex="0">
 
                     </div>
-                    <div id="answers">
+                    <div id="answers" tabindex="0">
 
                     </div>
-                    <button id="playAgain" class="playAgain">Pick Another Category!</button>
-                    <button id="finalResult" class="finalResult">See Final Results!</button>
+                    <button id="playAgain" class="playAgain" tabindex="0">Pick Another Category!</button>
+                    <button id="finalResult" class="finalResult" tabindex="0">See Final Results!</button>
                 </div>
             </div>
             <div class="modalOverlay">
@@ -76,8 +76,8 @@
     </main>
     <footer>
         <div class="wrapper">
-            <p>By: Heather Andreadis & Lucas Silbernagel</p>
-            <p>Data provided by <a href="https://opentdb.com/" target="_blank" rel="noreferrer">https://opentdb.com/</a>
+            <p tabindex="0">By: Heather Andreadis & Lucas Silbernagel</p>
+            <p tabindex="0">Data provided by <a href="https://opentdb.com/" target="_blank" rel="noreferrer" aria-label="Open Trivia Database API">https://opentdb.com/</a>
             </p>
         </div>
     </footer>
