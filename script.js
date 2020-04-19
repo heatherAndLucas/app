@@ -198,6 +198,14 @@ app.finalResults = () => {
         `<h2>You Win!</h2>
         <p> You got ${numCorrect}/6 categories correct!</p>
         <button id="newGame">New Game</button>
+        <ul class="backgroundAnimation">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
       `
       );
     } else {
@@ -205,6 +213,14 @@ app.finalResults = () => {
         `<h2>You Lose!</h2>
         <p> You only got ${numCorrect}/6 categories correct.</p>
         <button id="newGame">New Game</button>
+        <ul class="backgroundAnimation">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
       `
       );
     }
