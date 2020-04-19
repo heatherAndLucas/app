@@ -195,7 +195,7 @@ app.playAgain = () => {
 
 // HTML for game piece that shows up on results page 
 const gamePiece = `
-      <ul class="circle">
+      <ul class="circle" aria-label="Trivial Pursuit game piece">
         <li>
           <div class="text artP" id="artP"></div>
         </li>
