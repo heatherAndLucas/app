@@ -1,9 +1,18 @@
 // Namespace to hold code
 const app = {};
 
-// Start app
+// Start app, run background animation
 app.init = function () {
   app.startGame();
+  $('#intro').append(`
+  <ul class="backgroundAnimation">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    </ul>`)
 };
 
 // User selects difficulty level which is then stored into variable which is then put into API, run in app.startGame
@@ -184,6 +193,51 @@ app.playAgain = () => {
   });
 };
 
+// HTML for game piece that shows up on results page 
+const gamePiece = `
+      <ul class="circle">
+        <li>
+          <div class="text artP" id="artP"></div>
+        </li>
+        <li>
+          <div class="text sciP" id="sciP"></div>
+        </li>
+        <li>
+          <div class="text sportsP" id="sportsP"></div>
+        </li>
+        <li>
+          <div class="text geoP" id="geoP"></div>
+        </li>
+        <li>
+          <div class="text entertainP" id="entertainP"></div>
+        </li>
+        <li>
+          <div class="text histP" id="histP"></div>
+        </li>
+      <ul>`
+
+// Function that fills in relevant category color if correct 
+app.colorPieces = () => {
+  if ($('.art').hasClass('correct')) {
+    $('#artP').css("background-color", "#996B4D")
+  }
+  if ($('.science').hasClass('correct')) {
+    $('#sciP').css("background-color", "#1D8B65")
+  }
+  if ($('.sports').hasClass('correct')) {
+    $('#sportsP').css("background", "#DC6428")
+  }
+  if ($('.entertainment').hasClass('correct')) {
+    $('#entertainP').css('background', '#DA67B2')
+  }
+  if ($('.geography').hasClass('correct')) {
+    $('#geoP').css('background', '#349DD7')
+  }
+  if ($('.history').hasClass('correct')) {
+    $('#histP').css('background', '#E7CC41')
+  }
+}
+
 // When user click final results button, modal is removed, questions and categories is cleared and message is displayed depending on how many categories are correct, executed in app.submit.
 app.finalResults = () => {
   $("#finalResult").click(function() {
@@ -197,33 +251,20 @@ app.finalResults = () => {
       $("#resultsContainer").html(
         `<h2>You Win!</h2>
         <p> You got ${numCorrect}/6 categories correct!</p>
+        <div>${gamePiece}</div>
         <button id="newGame">New Game</button>
-        <ul class="backgroundAnimation">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
       `
       );
     } else {
       $("#resultsContainer").html(
         `<h2>You Lose!</h2>
         <p> You only got ${numCorrect}/6 categories correct.</p>
+        <div>${gamePiece}</div>
         <button id="newGame">New Game</button>
-        <ul class="backgroundAnimation">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
       `
       );
     }
+    app.colorPieces();
     // Refreshes page when new game button is clicked.
     $("#newGame").click(function() {
       location.reload();
