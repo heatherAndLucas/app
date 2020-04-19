@@ -366,7 +366,60 @@ footer p {
 }
 }
 
-// Final results section animation
+// Results section gamepiece 
+  .circle {
+  position: relative;
+  padding: 0;
+  margin: 1em auto;
+  width: 13em;
+  height: 13em;
+  border-radius: 50%;
+  list-style: none;
+  overflow: hidden;
+  border: 5px solid #222268;
+}
+.circle li {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 50%;
+  transform-origin: 0% 100%;
+  border: 3px solid #222268;
+  background: #222268;
+  box-sizing: border-box;
+}
+.circle .text {
+  position: absolute;
+  left: -100%;
+  width: 200%;
+  height: 200%;
+  text-align: center;
+  transform: skewY(30deg) rotate(30deg);
+  padding-top: 20px;
+  background: #222268;
+}
+.circle li:first-child {
+  transform: rotate(0deg) skewY(-30deg);
+}
+.circle li:nth-child(2) {
+  transform: rotate(60deg) skewY(-30deg);
+}
+.circle li:nth-child(3) {
+  transform: rotate(120deg) skewY(-30deg);
+}
+.circle li:nth-child(4) {
+  transform: rotate(180deg) skewY(-30deg);
+}
+.circle li:nth-child(5) {
+  transform: rotate(240deg) skewY(-30deg);
+}
+.circle li:nth-child(6) {
+  transform: rotate(300deg) skewY(-30deg);
+}
+
+// Intro section animation
 @keyframes animate {
     0%{
         transform: translateY(0) rotate(0deg);
