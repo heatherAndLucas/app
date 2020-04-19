@@ -58,6 +58,8 @@ h1 {
     font-size: 3.5rem;
     padding-top: 70px;
     padding-bottom: 55px;
+    color: darken($button, 10%);
+    text-shadow: 2px 0 0 $black, 0 -2px 0 $black, 0 2px 0 $black, -2px 0 0 $black;
 }
 
 p {

@@ -238,7 +238,7 @@ html {
 body {
   font-family: "Ubuntu", sans-serif;
   font-weight: 300;
-  background-color: #407086;
+  background-color: #477C95;
   color: #000000;
   min-height: 100vh;
   padding-bottom: 40px;
@@ -297,6 +297,8 @@ h1 {
   font-size: 3.5rem;
   padding-top: 70px;
   padding-bottom: 55px;
+  color: #907d1b;
+  text-shadow: 2px 0 0 #000000, 0 -2px 0 #000000, 0 2px 0 #000000, -2px 0 0 #000000;
 }
 
 p {
@@ -363,11 +365,11 @@ button:active {
 }
 
 .art {
-  background: #7B553E;
+  background: #996B4D;
 }
 
 .science {
-  background: #1C7A5F;
+  background: #1D8B65;
 }
 
 .sports {
