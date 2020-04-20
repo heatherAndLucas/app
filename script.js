@@ -1,6 +1,13 @@
 // Namespace to hold code
 const app = {};
 
+// Cache repetitive selectors
+const $questionsForm = $("#questionsForm"),
+  $modal = $(".modal"),
+  $modalOverlay = $(".modalOverlay"),
+  $playAgain = $("#playAgain"),
+  $answers = $("#answers");
+
 // Start app, run background animation
 app.init = function () {
   app.startGame();
@@ -112,9 +119,9 @@ app.displayQuestions = (questionsArray) => {
               <label for="${question}${shuffArray[3]}">${shuffArray[3]}</label>
             </fieldset>
         `;
-    $("#questionsForm").prepend(oneQuestion);
+    $questionsForm.prepend(oneQuestion);
   });
-  $("#questionsForm").append('<button id="submit" class="submit">Submit!</button>');
+  $questionsForm.append('<button id="submit" class="submit">Submit!</button>');
 };
 
 
@@ -137,16 +144,16 @@ app.submit = () => {
     } else {
 
       // If all questions have been answered show category results modal
-      $(".modal").addClass("active");
-      $(".modalOverlay").addClass("active");
+      $modal.addClass("active");
+      $modalOverlay.addClass("active");
 
       // If this is the last category show final results button in modal instead of playagain
       if ($(".catChoice:disabled").length === 6) {
         $("#finalResult").show();
-        $("#playAgain").hide();
+        $playAgain.hide();
         app.finalResults();
       } else {
-        $("#playAgain").show();
+        $playAgain.show();
       }
 
       // Compare array of correct answers to array of user answers, display either correct or inccorrect statement in modal for each question.
@@ -154,10 +161,10 @@ app.submit = () => {
       for (var i = 0; i < app.userAns.length; i++) {
         // Use regex to fix bug on answers with symbols in them not being recognized as correct. 
         if (app.userAns[i].replace(/[^a-zA-Z0-9]+/g, "") === app.answer[i].replace(/&.*?;/gi, '').replace(/[^a-zA-Z0-9]+/g, "")) {
-          $("#answers").append(`<p>${app.userAns[i]} is correct!</p>`);
+          $answers.append(`<p>${app.userAns[i]} is correct!</p>`);
           correctAns = correctAns + 1;
         } else if (app.userAns[i] != app.answer[i]) {
-          $("#answers").append(
+          $answers.append(
             `<p>${app.userAns[i]} is incorrect. The correct answer was ${app.answer[i]}.</p>`
           );
         }
@@ -181,16 +188,16 @@ app.submit = () => {
 
 // When user clicks Play Again, remove modal, clear question and empty variables indicated, run in app.submit
 app.playAgain = () => {
-  $("#playAgain").click(function() {
-    $(".modal").removeClass("active");
-    $(".modalOverlay").removeClass("active");
+  $playAgain.click(function() {
+    $modal.removeClass("active");
+    $modalOverlay.removeClass("active");
 
     $("#categories").show();
 
     $(window).scrollTop(0);
 
-    $("#questionsForm").html("");
-    $("#answers").html("");
+    $questionsForm.html("");
+    $answers.html("");
 
     catNumber = [];
     app.userAns = [];
@@ -246,9 +253,9 @@ app.colorPieces = () => {
 // When user click final results button, modal is removed, questions and categories is cleared and message is displayed depending on how many categories are correct, executed in app.submit.
 app.finalResults = () => {
   $("#finalResult").click(function() {
-    $(".modal").removeClass("active");
-    $(".modalOverlay").removeClass("active");
-    $("#questionsForm").html("");
+    $modal.removeClass("active");
+    $modalOverlay.removeClass("active");
+    $questionsForm.html("");
     $(".categories").hide();
 
     let numCorrect = $(".correct").length;
