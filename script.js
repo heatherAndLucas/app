@@ -47,6 +47,7 @@ app.displayCategory = () => {
     app.getQuestions();
     $(this).attr("disabled", true);
     $('#categories').hide();
+    $(window).scrollTop(0);
   });
 };
 
@@ -185,6 +186,8 @@ app.playAgain = () => {
     $(".modalOverlay").removeClass("active");
 
     $("#categories").show();
+
+    $(window).scrollTop(0);
 
     $("#questionsForm").html("");
     $("#answers").html("");
