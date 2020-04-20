@@ -1,3 +1,4 @@
+// BASE STYLES 
 body {
     font-family: $ubuntu;
     font-weight: 300;
@@ -8,9 +9,16 @@ body {
     position: relative;
 }
 
+.wrapper {
+    margin: 0 auto;
+    width: 90vw;
+    max-width: 600px;
+}
+
 // REMOVE DEFAULTS
 ul{
     list-style-type: none;
+    text-align:center;
     margin:0;
     padding: 0;
 }
@@ -23,6 +31,7 @@ a{
 h1,h2,h3,h4,p, fieldset{
     margin: 0;
     padding: 0;
+    text-align:center;
     -webkit-user-select: none; /* Safari */        
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
@@ -36,41 +45,54 @@ input {
     display: none;
 }
 
-fieldset{
-    border: none;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-}
-
-// Start Page 
+// GLOBAL STYLES
 h1,
 button,
-.modal h2,
+h2,
+legend,
 .difficultyForm label {
     font-family: $robot;
 }
 
-.wrapper {
+p {
+    line-height: 1.3;
+    font-size: 1.2rem;
+}
+
+fieldset{
+    border: none;
+    display: flex;
+    flex-direction: column;
+}
+
+label, button{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor:pointer;
+    font-size: 1.5rem;
+    border-radius: 3px;
+    box-shadow: 4px 4px 3px 1px rgba(0,0,0,0.32);
+}
+
+button {
+    background: $primaryAccent;
+    border: none;
     margin: 0 auto;
-    width: 90vw;
-    max-width: 600px;
+    width: 70%;
+}
+
+button:active, label:active{
+    box-shadow: none; 
 }
 
 
+// INTRO PAGE
 h1 {
-    text-align: center;
-    font-size: 3.5rem;
+    font-size: 3.7rem;
     margin-top: 70px;
     margin-bottom: 55px;
-    color: darken($button, 10%);
+    color: darken($primaryAccent, 10%);
     text-shadow: -1px -1px 0 $black, 1px -1px 0 $black, -1px 1px 0 $black, 1px 1px 0 $black;
-}
-
-p {
-    line-height: 1.4;
-    text-align: center;
-    font-size: 1.2rem;
 }
 
 .difficultyForm fieldset {
@@ -78,54 +100,27 @@ p {
     margin-top: 60px;
 }
 
-.difficultyForm label,
-.startGame {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    font-size: 1.5rem;
-    border-radius: 3px;
-    box-shadow: 4px 4px 3px 1px rgba(0,0,0,0.32);
-}
-
 .difficultyForm label {
     margin-bottom: 10px;
-    cursor: pointer;
-    background: $label;
-    color: $white;
-    
+    background: $secondaryAccent;
+    color: $white;  
 }
+
 .difficultyForm input[type="radio"]:checked+label, .difficultyForm label:focus{
-    background-color: lighten($label, 20%)
-}
-.difficultyForm label:active{
-    box-shadow: none;
+    background-color: lighten($secondaryAccent, 20%)
 }
 
 .startGame {
     display: block;
-    margin: 0 auto;
-    width: 70%;
 }
 
 .startGame:active{
-    background-color: darken($button, 20%);
-    box-shadow: none; 
+    background-color: darken($primaryAccent, 20%);
     color: $white;
 }
 
-button {
-    background: $button;
-    cursor: pointer;
-    border: none;
-    box-shadow: 4px 4px 3px 1px rgba(0,0,0,0.32);
-}
-button:active{
-    box-shadow: none; 
-}
 
-
-
-// categories 
+// CATEGORIES PAGE
 .art {
     background: $art;
 }
@@ -152,23 +147,16 @@ button:active{
 
 .categories{
     h2{
-        text-align: center;
-        padding-bottom: 40px;
-    }
-
-    ul{
-        text-align: center;
+        font-family: $ubuntu;
+        margin-bottom: 40px;
     }
 
     li{
         margin-bottom: 20px;
     }
+
     button{
         width: 280px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        font-size: 1.5rem;
-        border-radius: 3px;
     }
 
     i{
@@ -178,83 +166,54 @@ button:active{
 
 }
 
-// Questions
+
+// QUESTIONS
 .questions{
     margin-bottom: 50px;
+
     fieldset{
         margin-bottom: 40px;
     }
+
     legend{
-        font-weight: 400;
         width: 100%;
-        font-size: 1.35rem;
+        font-size: 1.4rem;
         margin-bottom: 10px;
-        background: $button;
-        color: $black;
+        background: $primaryAccent;
         border-radius: 3px;
         padding: 5px;
         border: 2px solid $black;
-        font-family: $robot;
     }
+
     label{
         margin-bottom: 5px;
-        width: 100%;
-        padding-top: 5px;
-        padding-bottom: 5px;
+        box-shadow: none;
         font-size: 1.1rem;
-        border-radius: 3px;
         background: $white;
-        border: 2px solid $label;
-        cursor: pointer;
+        border: 2px solid $secondaryAccent;
     }
+
     .questionsForm label:focus, .questionsForm label:hover{
-        background: $label;
+        background: $secondaryAccent;
         color: $white;
     }
+
     .questionsForm input[type="radio"]:checked+label{
-        background: darken($label, 15%);
+        background: darken($secondaryAccent, 15%);
         color: $white;
     }
 }
 
 .submit{
     display: block;
-    margin: 0 auto;
-    width: 70%;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    font-size: 1.5rem;
-    border-radius: 3px;
-    box-shadow: 4px 4px 3px 1px rgba(0,0,0,0.32);
 }
 .submit:active{
-    background-color: darken($button, 20%);
-    box-shadow: none; 
+    background-color: darken($primaryAccent, 20%);
     color: $white;
 }
 
 
-
-
-footer {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-}
-
-footer .wrapper {
-    width: 95vw;
-}
-
-footer p {
-    margin: 0 auto;
-    font-size: 1rem;
-}
-
-
-
-
-/* Modal styles begin */
+// MODAL 
 .modal {
     visibility: hidden;
     z-index: 20;
@@ -267,10 +226,8 @@ footer p {
     transform: translate(-50%, -50%);
     position: fixed;
     padding: 30px 10px;
-    border: 5px solid $button;
+    border: 5px solid $primaryAccent;
     border-radius: 3px;
-    display: flex;
-    justify-content: center;
 }
 
 .modalContent {
@@ -279,29 +236,20 @@ footer p {
 
 .modal h2{
     font-size: 2.2rem;
-    text-align: center;
     margin-bottom: 20px;
 }
 
 .modal p{
-    line-height: 1.3;
     margin-bottom: 15px;
 }
 
 .modal button{
-    margin: 0 auto;
     margin-top: 20px;
     width: 250px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    font-size: 1.5rem;
-    border-radius: 3px;
-    box-shadow: 4px 4px 3px 1px rgba(0,0,0,0.32);
 }
 
 .modal button:active{
-    background-color: darken($button, 20%);
-    box-shadow: none; 
+    background-color: darken($primaryAccent, 20%);
     color: $white;
 }
 
@@ -333,15 +281,28 @@ footer p {
 .modalOverlay.active {
     visibility: visible;
 }
-/* Modal styles end */
 
 
-// Results 
+// FOOTER
+footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+footer .wrapper {
+    width: 95vw;
+}
+
+footer p {
+    font-size: 1rem;
+}
+
+
+// RESULTS
 .resultsContainer{
     h2{
-        font-family: $robot;
         margin-bottom: 30px;
-        text-align:center;
         font-size: 3.5rem;
     }
 
@@ -351,90 +312,84 @@ footer p {
 
     button{
         display: block;
-        margin: 0 auto;
         margin-top: 60px;
         margin-bottom: 60px;
-        width: 70%;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        font-size: 1.5rem;
-        border-radius: 3px;
-        box-shadow: 4px 4px 3px 1px rgba(0,0,0,0.32);
     }
+
     button:active{
-    background-color: darken($button, 20%);
-    box-shadow: none; 
-    color: $white;
-}
+        background-color: darken($primaryAccent, 20%);
+        color: $white;
+    }
 }
 
 // Results section gamepiece 
 // https://stackoverflow.com/questions/29006214/how-to-divide-a-circle-into-12-equal-parts-with-color-using-css3-javascript/51580769
-
-  .circle {
-  position: relative;
-  padding: 0;
-  margin: 1em auto;
-  width: 13em;
-  height: 13em;
-  border-radius: 50%;
-  list-style: none;
-  overflow: hidden;
-  border: 5px solid #222268;
+.circle {
+    position: relative;
+    margin: 1em auto;
+    width: 13em;
+    height: 13em;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #222268;
 }
+
 .circle li {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 50%;
-  transform-origin: 0% 100%;
-  border: 3px solid #222268;
-  background: #222268;
-  box-sizing: border-box;
-}
-.circle .text {
-  position: absolute;
-  left: -100%;
-  width: 200%;
-  height: 200%;
-  text-align: center;
-  transform: skewY(30deg) rotate(30deg);
-  padding-top: 20px;
-  background: #222268;
-}
-.circle li:first-child {
-  transform: rotate(0deg) skewY(-30deg);
-}
-.circle li:nth-child(2) {
-  transform: rotate(60deg) skewY(-30deg);
-}
-.circle li:nth-child(3) {
-  transform: rotate(120deg) skewY(-30deg);
-}
-.circle li:nth-child(4) {
-  transform: rotate(180deg) skewY(-30deg);
-}
-.circle li:nth-child(5) {
-  transform: rotate(240deg) skewY(-30deg);
-}
-.circle li:nth-child(6) {
-  transform: rotate(300deg) skewY(-30deg);
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 50%;
+    transform-origin: 0% 100%;
+    border: 3px solid #222268;
+    background: #222268;
 }
 
-// Intro section animation
+.circle .text {
+    position: absolute;
+    left: -100%;
+    width: 200%;
+    height: 200%;
+    transform: skewY(30deg) rotate(30deg);
+    padding-top: 20px;
+}
+
+.circle li:first-child {
+    transform: rotate(0deg) skewY(-30deg);
+}
+
+.circle li:nth-child(2) {
+    transform: rotate(60deg) skewY(-30deg);
+}
+
+.circle li:nth-child(3) {
+    transform: rotate(120deg) skewY(-30deg);
+}
+
+.circle li:nth-child(4) {
+    transform: rotate(180deg) skewY(-30deg);
+}
+
+.circle li:nth-child(5) {
+    transform: rotate(240deg) skewY(-30deg);
+}
+
+.circle li:nth-child(6) {
+    transform: rotate(300deg) skewY(-30deg);
+}
+
+
+// INTRO SECTION ANIMATION 
 // https://wweb.dev/resources/animated-css-background-generator
 @keyframes animate {
     0%{
         transform: translateY(0) rotate(0deg);
         opacity: 1;
-        border-radius: 0;
     }
     100%{
         transform: translateY(-1000px) rotate(720deg);
         opacity: 0;
-        border-radius: 50%;
     }
 }
 
@@ -444,65 +399,52 @@ footer p {
     height: 100vh;
     top: 0;
     left: 0;
-    margin: 0;
-    padding: 0;
     overflow: hidden;
     z-index: -50;
 }
+
 .backgroundAnimation li {
     position: absolute;
     display: block;
-    list-style: none;
-    width: 20px;
-    height: 20px;
+    width: 100px;
+    height: 100px;
+    bottom: -100px;
+    border-radius: 5px;
     animation: animate 15s linear infinite;
 }
 
 .backgroundAnimation li:nth-child(1) {
     left: 40%;
-    width: 100px;
-    height: 100px;
-    bottom: -100px;
     animation-delay: 0.1s;
     background: rgba(231, 204, 65, 0.6);
 }
+
 .backgroundAnimation li:nth-child(2) {
     left: 60%;
-    width: 100px;
-    height: 100px;
-    bottom: -100px;
     animation-delay: 2s;
     background: rgba(218, 103, 178, 0.6);
 }
+
 .backgroundAnimation li:nth-child(3) {
     left: 49%;
-    width: 100px;
-    height: 100px;
-    bottom: -100px;
     animation-delay: 4s;
     background: rgba(29, 139, 101, 1);
 }
+
 .backgroundAnimation li:nth-child(4) {
     left: 35%;
-    width: 100px;
-    height: 100px;
-    bottom: -100px;
     animation-delay: 6s;
     background: rgba(153, 107, 77, 0.6);
 }
+
 .backgroundAnimation li:nth-child(5) {
     left: 30%;
-    width: 100px;
-    height: 100px;
-    bottom: -100px;
     animation-delay: 8s;
     background: rgba(52, 157, 215, 0.6);
 }
+
 .backgroundAnimation li:nth-child(6) {
     left: 65%;
-    width: 100px;
-    height: 100px;
-    bottom: -100px;
     animation-delay: 10s;
     background: rgba(220, 100, 40, 0.6);
 }
