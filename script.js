@@ -3,10 +3,10 @@ const app = {};
 
 // Cache repetitive selectors
 const $questionsForm = $("#questionsForm"),
-  $modal = $(".modal"),
-  $modalOverlay = $(".modalOverlay"),
-  $playAgain = $("#playAgain"),
-  $answers = $("#answers");
+      $modal = $(".modal"),
+      $modalOverlay = $(".modalOverlay"),
+      $playAgain = $("#playAgain"),
+      $answers = $("#answers");
 
 // Start app, run background animation
 app.init = function () {
