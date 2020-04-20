@@ -72,6 +72,7 @@ app.answer = [];
 
 app.displayQuestions = (questionsArray) => {
   questionsArray.forEach((quest) => {
+
     const question = quest.question;
 
     const answer = quest.correct_answer;
@@ -80,6 +81,7 @@ app.displayQuestions = (questionsArray) => {
     const wAnswers = quest.incorrect_answers;
 
     const options = [answer, ...wAnswers];
+
 
     // Randomly display options of correct and incorrect answers to user, using Durstenfeld's algorithm 
     function shuffle(a) {
@@ -92,21 +94,21 @@ app.displayQuestions = (questionsArray) => {
       }
       return a;
     }
-
+    
     const shuffArray = shuffle(options);
-
+    
     // Post question saved in question and shuffled answer options onto page in formatted fieldset with radio input for answer options. 
     const oneQuestion = `
 	          <fieldset>
               <legend>${question}</legend>
-              <input type="radio" name="${question}" value="${shuffArray[0]}" id="${shuffArray[0]}">
-              <label for="${shuffArray[0]}">${shuffArray[0]}</label>
-              <input type="radio" name="${question}" value="${shuffArray[1]}" id="${shuffArray[1]}">
-              <label for="${shuffArray[1]}">${shuffArray[1]}</label>
-              <input type="radio" name="${question}" value="${shuffArray[2]}" id="${shuffArray[2]}">
-              <label for="${shuffArray[2]}">${shuffArray[2]}</label>
-              <input type="radio" name="${question}" value="${shuffArray[3]}" id="${shuffArray[3]}">
-              <label for="${shuffArray[3]}">${shuffArray[3]}</label>
+              <input type="radio" name="${question}" value="${shuffArray[0]}" id="${question}${shuffArray[0]}">
+              <label for="${question}${shuffArray[0]}">${shuffArray[0]}</label>
+              <input type="radio" name="${question}" value="${shuffArray[1]}" id="${question}${shuffArray[1]}">
+              <label for="${question}${shuffArray[1]}">${shuffArray[1]}</label>
+              <input type="radio" name="${question}" value="${shuffArray[2]}" id="${question}${shuffArray[2]}">
+              <label for="${question}${shuffArray[2]}">${shuffArray[2]}</label>
+              <input type="radio" name="${question}" value="${shuffArray[3]}" id="${question}${shuffArray[3]}">
+              <label for="${question}${shuffArray[3]}">${shuffArray[3]}</label>
             </fieldset>
         `;
     $("#questionsForm").prepend(oneQuestion);
