@@ -331,7 +331,7 @@ footer p {
     height: 13em;
     border-radius: 50%;
     overflow: hidden;
-    border: 5px solid #222268;
+    border: 5px solid $secondaryAccent;
 }
 
 .circle li {
@@ -342,8 +342,8 @@ footer p {
     width: 50%;
     height: 50%;
     transform-origin: 0% 100%;
-    border: 3px solid #222268;
-    background: #222268;
+    border: 3px solid $seccondaryAccent;
+    background: $secondaryAccent;
 }
 
 .circle .text {
