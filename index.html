@@ -16,15 +16,19 @@
 </head>
 
 <body>
+    <!-- HEADER  -->
     <header>
         <div class="wrapper">
             <h1>Trivia Quest</h1>
         </div>
     </header>
+    <!-- MAIN  -->
     <main>
         <div class="wrapper">
+            <!-- INTRO  -->
             <section id="intro">
                 <p>Are you a Trivial Pursuit master? Test how well you know the six categories. Choose your difficulty level and see how many you can conquer on your quest!</p>
+                <!-- DIFFICULTY SELECTOR  -->
                 <section class="difficultyFormSection">
                     <form action="#" id="difficultyForm" class="difficultyForm">
                         <fieldset>
@@ -40,6 +44,7 @@
                 </section>
                 <button id="startGame" class="startGame">Start Game</button>
             </section>
+            <!-- CATEGORY SELECTOR  -->
             <section class="categories" id="categories">
                 <h2>Choose a category!</h2>
                 <ul>
@@ -51,15 +56,17 @@
                     <li><button class="catChoice history" id="23">History</button></li>
                 </ul>
             </section>
+            <!-- QUESTIONS  -->
             <section id="questions" class="questions">
                 <form action="#" method="#" class="questionsForm" name="questionsForm" id="questionsForm" aria-label="Answer the three multiple choice questions on this page. Press control option space to select an answer for each question.">
 
                 </form>
             </section>
+            <!-- RESULTS  -->
             <section id="resultsContainer" class="resultsContainer">
 
             </section>
-            <!-- Modal  -->
+            <!-- MODAL -->
             <div class="modal" tabindex="0">
                 <!-- The modal content -->
                 <div class="modalContent">
@@ -76,6 +83,7 @@
             <div class="modalOverlay"></div>
         </div>
     </main>
+    <!-- FOOTER  -->
     <footer>
         <div class="wrapper">
             <p tabindex="0">By: <a href="http://heatherandreadis.com/" target="_blank" rel="noreferrer" aria-label="portfolio website for Heather Andreadis">Heather Andreadis</a> & <a href="https://lucassilbernagel.com/" target="_blank" rel="noreferrer" aria-label="portfolio website for Lucas Silbernagel">Lucas Silbernagel</a></p>
@@ -83,6 +91,7 @@
             </p>
         </div>
     </footer>
+    <!-- SCRIPTS  -->
     <script src='https://code.jquery.com/jquery-3.4.0.min.js'
         integrity='sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=' crossorigin='anonymous'></script>
     <script src="script.js"></script>

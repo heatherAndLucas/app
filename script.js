@@ -79,7 +79,8 @@ app.getQuestions = () => {
 app.answer = [];
 
 app.displayQuestions = (questionsArray) => {
-  questionsArray.forEach((quest) => {
+  questionsArray.forEach((quest, index) => {
+    const qNum = index + 'q';
 
     const question = quest.question;
 
@@ -89,7 +90,6 @@ app.displayQuestions = (questionsArray) => {
     const wAnswers = quest.incorrect_answers;
 
     const options = [answer, ...wAnswers];
-
 
     // Randomly display options of correct and incorrect answers to user, using Durstenfeld's algorithm 
     function shuffle(a) {
@@ -105,18 +105,18 @@ app.displayQuestions = (questionsArray) => {
     
     const shuffArray = shuffle(options);
     
-    // Post question saved in question and shuffled answer options onto page in formatted fieldset with radio input for answer options. 
+    // Post question saved in question and shuffled answer options onto page in formatted fieldset with radio input for answer options. qNum is used to eliminate error that occured if option happened twice on the page (no longer unique) and if answer matched a category id. 
     const oneQuestion = `
 	          <fieldset>
               <legend>${question}</legend>
-              <input type="radio" name="${question}" value="${shuffArray[0]}" id="${question}${shuffArray[0]}">
-              <label for="${question}${shuffArray[0]}">${shuffArray[0]}</label>
-              <input type="radio" name="${question}" value="${shuffArray[1]}" id="${question}${shuffArray[1]}">
-              <label for="${question}${shuffArray[1]}">${shuffArray[1]}</label>
-              <input type="radio" name="${question}" value="${shuffArray[2]}" id="${question}${shuffArray[2]}">
-              <label for="${question}${shuffArray[2]}">${shuffArray[2]}</label>
-              <input type="radio" name="${question}" value="${shuffArray[3]}" id="${question}${shuffArray[3]}">
-              <label for="${question}${shuffArray[3]}">${shuffArray[3]}</label>
+              <input type="radio" name="${question}" value="${shuffArray[0]}" id="${qNum}${shuffArray[0]}">
+              <label for="${qNum}${shuffArray[0]}">${shuffArray[0]}</label>
+              <input type="radio" name="${question}" value="${shuffArray[1]}" id="${qNum}${shuffArray[1]}">
+              <label for="${qNum}${shuffArray[1]}">${shuffArray[1]}</label>
+              <input type="radio" name="${question}" value="${shuffArray[2]}" id="${qNum}${shuffArray[2]}">
+              <label for="${qNum}${shuffArray[2]}">${shuffArray[2]}</label>
+              <input type="radio" name="${question}" value="${shuffArray[3]}" id="${qNum}${shuffArray[3]}">
+              <label for="${qNum}${shuffArray[3]}">${shuffArray[3]}</label>
             </fieldset>
         `;
     $questionsForm.prepend(oneQuestion);
