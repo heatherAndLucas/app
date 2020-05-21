@@ -243,6 +243,7 @@ body {
   min-height: 100vh;
   padding-bottom: 40px;
   position: relative;
+  cursor: default;
 }
 
 .wrapper {
@@ -267,21 +268,24 @@ h1, h2, h3, h4, p, fieldset {
   margin: 0;
   padding: 0;
   text-align: center;
-  -webkit-user-select: none;
-  /* Safari */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* IE10+/Edge */
-  user-select: none;
-  /* Standard */
 }
 
 .categories,
 .finalResult,
-.playAgain,
-input {
+.playAgain {
   display: none;
+}
+
+input {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+  /* added line */
 }
 
 h1,
@@ -318,6 +322,23 @@ label, button {
           box-shadow: 4px 4px 3px 1px rgba(0, 0, 0, 0.32);
 }
 
+.playAgain:hover,
+.playAgain:focus,
+.playAgain:active,
+.finalResult:hover,
+.finalResult:focus,
+.finalResult:active,
+#newGame:hover,
+#newGame:focus,
+#newGame:active {
+  background-color: #dabf37;
+}
+
+.labelFocus {
+  background-color: #2f2f8e;
+  border: 2px solid #FFFFFF;
+}
+
 button {
   background: #bba223;
   border: none;
@@ -349,7 +370,12 @@ h1 {
   color: #FFFFFF;
 }
 
-.difficultyForm input[type="radio"]:checked + label, .difficultyForm label:focus {
+.difficultyForm label:hover,
+.difficultyForm label:focus {
+  background: #2f2f8e;
+}
+
+.difficultyForm input[type="radio"]:checked + label {
   background-color: #3b3bb5;
 }
 
@@ -357,33 +383,70 @@ h1 {
   display: block;
 }
 
+.startGame:hover,
+.startGame:focus,
 .startGame:active {
-  background-color: #655813;
-  color: #FFFFFF;
+  background-color: #dabf37;
 }
 
 .art {
   background: #996B4D;
 }
 
+.art:hover,
+.art:focus,
+.art:active {
+  background: #b28567;
+}
+
 .science {
   background: #1D8B65;
+}
+
+.science:hover,
+.science:focus,
+.science:active {
+  background: #26b584;
 }
 
 .sports {
   background: #DC6428;
 }
 
+.sports:hover,
+.sports:focus,
+.sports:active {
+  background: #e38454;
+}
+
 .entertainment {
   background: #DA67B2;
+}
+
+.entertainment:hover,
+.entertainment:focus,
+.entertainment:active {
+  background: #e490c7;
 }
 
 .geography {
   background: #349DD7;
 }
 
+.geography:hover,
+.geography:focus,
+.geography:active {
+  background: #5fb2df;
+}
+
 .history {
   background: #E7CC41;
+}
+
+.history:hover,
+.history:focus,
+.history:active {
+  background: #edd86e;
 }
 
 .categories h2 {
@@ -431,7 +494,8 @@ h1 {
   border: 2px solid #222268;
 }
 
-.questions .questionsForm label:focus, .questions .questionsForm label:hover {
+.questions .questionsForm label:focus,
+.questions .questionsForm label:hover {
   background: #222268;
   color: #FFFFFF;
 }
@@ -445,9 +509,10 @@ h1 {
   display: block;
 }
 
+.submit:hover,
+.submit:focus,
 .submit:active {
-  background-color: #655813;
-  color: #FFFFFF;
+  background-color: #dabf37;
 }
 
 .modal {

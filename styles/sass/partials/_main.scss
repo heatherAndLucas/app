@@ -7,6 +7,7 @@ body {
     min-height: 100vh;
     padding-bottom: 40px;
     position: relative;
+    cursor: default;
 }
 
 .wrapper {
@@ -32,17 +33,22 @@ h1,h2,h3,h4,p, fieldset{
     margin: 0;
     padding: 0;
     text-align:center;
-    -webkit-user-select: none; /* Safari */        
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
-    user-select: none; /* Standard */
 }
 
 .categories,
 .finalResult, 
-.playAgain,
-input {
+.playAgain {
     display: none;
+}
+
+input {
+    position: absolute !important;
+    height: 1px; 
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap; /* added line */
 }
 
 // GLOBAL STYLES
@@ -72,6 +78,23 @@ label, button{
     font-size: 1.5rem;
     border-radius: 3px;
     box-shadow: 4px 4px 3px 1px rgba(0,0,0,0.32);
+}
+
+.playAgain:hover,
+.playAgain:focus,
+.playAgain:active,
+.finalResult:hover,
+.finalResult:focus,
+.finalResult:active,
+#newGame:hover,
+#newGame:focus,
+#newGame:active {
+    background-color: lighten($primaryAccent, 10%);
+}
+
+.labelFocus {
+    background-color: lighten($secondaryAccent, 10%);
+    border: 2px solid $white;
 }
 
 button {
@@ -106,43 +129,78 @@ h1 {
     color: $white;  
 }
 
-.difficultyForm input[type="radio"]:checked+label, .difficultyForm label:focus{
-    background-color: lighten($secondaryAccent, 20%)
+.difficultyForm label:hover,
+.difficultyForm label:focus {
+    background: lighten($secondaryAccent, 10%);
+}
+
+.difficultyForm input[type="radio"]:checked+label {
+    background-color: lighten($secondaryAccent, 20%);
 }
 
 .startGame {
     display: block;
 }
 
-.startGame:active{
-    background-color: darken($primaryAccent, 20%);
-    color: $white;
+.startGame:hover,
+.startGame:focus,
+.startGame:active {
+    background-color: lighten($primaryAccent, 10%);
 }
-
 
 // CATEGORIES PAGE
 .art {
     background: $art;
 }
+.art:hover,
+.art:focus,
+.art:active {
+    background: lighten($art, 10%);
+}
 
 .science {
     background: $science;
+}
+.science:hover,
+.science:focus,
+.science:active {
+    background: lighten($science, 10%);
 }
 
 .sports {
     background: $sports;
 }
+.sports:hover,
+.sports:focus,
+.sports:active {
+    background: lighten($sports, 10%)
+}
 
 .entertainment {
     background: $entertainment;
+}
+.entertainment:hover,
+.entertainment:focus,
+.entertainment:active {
+    background: lighten($entertainment, 10%)
 }
 
 .geography {
     background: $geography;
 }
+.geography:hover,
+.geography:focus,
+.geography:active {
+    background: lighten($geography, 10%)
+}
 
 .history {
     background: $history;
+}
+.history:hover,
+.history:focus,
+.history:active {
+    background: lighten($history, 10%)
 }
 
 .categories{
@@ -193,7 +251,8 @@ h1 {
         border: 2px solid $secondaryAccent;
     }
 
-    .questionsForm label:focus, .questionsForm label:hover{
+    .questionsForm label:focus, 
+    .questionsForm label:hover {
         background: $secondaryAccent;
         color: $white;
     }
@@ -207,9 +266,10 @@ h1 {
 .submit{
     display: block;
 }
+.submit:hover,
+.submit:focus,
 .submit:active{
-    background-color: darken($primaryAccent, 20%);
-    color: $white;
+    background-color: lighten($primaryAccent, 10%);
 }
 
 
@@ -342,7 +402,7 @@ footer p {
     width: 50%;
     height: 50%;
     transform-origin: 0% 100%;
-    border: 3px solid $seccondaryAccent;
+    border: 3px solid $secondaryAccent;
     background: $secondaryAccent;
 }
 
