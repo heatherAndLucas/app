@@ -157,13 +157,22 @@ app.submit = () => {
       $modal.addClass("active");
       $modalOverlay.addClass("active");
 
-      // If this is the last category show final results button in modal instead of playagain
+      // Elements to remove from tab order when modal is open
+      const backgroundElements = $("header, footer, form, label, input, p, a, .submit")
+
+      // Trap focus inside modal when open
+      $("header, footer, form, label, input").attr("aria-hidden", "true");
+      backgroundElements.attr("tabindex", "-1");
+
+      // If this is the last category show final results button in modal instead of playAgain
       if ($(".catChoice:disabled").length === 6) {
         $("#finalResult").show();
+        $("#finalResult").focus();
         $playAgain.hide();
         app.finalResults();
       } else {
         $playAgain.show();
+        $playAgain.focus();
       }
 
       // Compare array of correct answers to array of user answers, display either correct or inccorrect statement in modal for each question.
@@ -212,6 +221,11 @@ app.playAgain = () => {
     catNumber = [];
     app.userAns = [];
     app.answer = [];
+
+    // Return focus to page elements
+    $("header, footer, form, label, input").attr("aria-hidden", "false");
+    backgroundElements.attr("tabindex", "0");
+
   });
 };
 
