@@ -88,6 +88,18 @@ app.getQuestions = () => {
 // For each of the 3 questions takes data stored in questionsArray and stores needed data in variables in order to put question on the page with the 4 answer options randomly displayed. Run in app.getQuestions
 app.answer = [];
 
+// Shuffle function using Durstenfeld's algorithm 
+app.shuffle = function shuffle(a) {
+  var j, x, i;
+  for (i = a.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = a[i];
+    a[i] = a[j];
+    a[j] = x;
+  }
+  return a;
+}
+
 app.displayQuestions = (questionsArray) => {
   questionsArray.forEach((quest, index) => {
     const qNum = index + 'q';
@@ -100,20 +112,9 @@ app.displayQuestions = (questionsArray) => {
     const wAnswers = quest.incorrect_answers;
 
     const options = [answer, ...wAnswers];
-
-    // Randomly display options of correct and incorrect answers to user, using Durstenfeld's algorithm 
-    function shuffle(a) {
-      var j, x, i;
-      for (i = a.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        x = a[i];
-        a[i] = a[j];
-        a[j] = x;
-      }
-      return a;
-    }
     
-    const shuffArray = shuffle(options);
+    // Randomly display options of correct and incorrect answers to user
+    const shuffArray = app.shuffle(options);
     
     // Post question saved in question and shuffled answer options onto page in formatted fieldset with radio input for answer options. qNum is used to eliminate error that occured if option happened twice on the page (no longer unique) and if answer matched a category id. 
     const oneQuestion = `
