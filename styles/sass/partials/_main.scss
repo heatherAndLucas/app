@@ -92,11 +92,6 @@ label, button{
     background-color: lighten($primaryAccent, 10%);
 }
 
-.labelFocus {
-    background-color: lighten($secondaryAccent, 10%);
-    border: 2px solid $white;
-}
-
 button {
     background: $primaryAccent;
     border: none;
@@ -129,8 +124,8 @@ h1 {
     color: $white;  
 }
 
-.difficultyForm label:hover,
-.difficultyForm label:focus {
+.difficultyForm input[type="radio"]:hover+label,
+.difficultyForm input[type="radio"]:focus+label {
     background: lighten($secondaryAccent, 10%);
 }
 
@@ -251,8 +246,8 @@ h1 {
         border: 2px solid $secondaryAccent;
     }
 
-    .questionsForm label:focus, 
-    .questionsForm label:hover {
+    .questionsForm input[type="radio"]:focus+label,
+    .questionsForm input[type="radio"]:hover+label {
         background: $secondaryAccent;
         color: $white;
     }
