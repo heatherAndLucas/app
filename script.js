@@ -11,7 +11,6 @@ const $questionsForm = $("#questionsForm"),
 // Start app, run background animation
 app.init = function () {
   app.startGame();
-  app.tabFocus();
   $('#intro').append(`
   <ul class="backgroundAnimation">
     <li></li>
@@ -22,15 +21,6 @@ app.init = function () {
     <li></li>
     </ul>`)
 };
-
-// Allow user to navigate with keyboard and make it more visually apparent
-app.tabFocus = function () {
-  $("form :input").focus(function () {
-    $("label[for='" + this.id + "']").addClass("labelFocus");
-  }).blur(function() {
-    $("label").removeClass("labelFocus");
-  });
-}
 
 // User selects difficulty level which is then stored into variable which is then put into API, run in app.startGame
 let difficulty = [];
