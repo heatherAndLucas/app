@@ -334,11 +334,6 @@ label, button {
   background-color: #dabf37;
 }
 
-.labelFocus {
-  background-color: #2f2f8e;
-  border: 2px solid #FFFFFF;
-}
-
 button {
   background: #bba223;
   border: none;
@@ -370,8 +365,8 @@ h1 {
   color: #FFFFFF;
 }
 
-.difficultyForm label:hover,
-.difficultyForm label:focus {
+.difficultyForm input[type="radio"]:hover + label,
+.difficultyForm input[type="radio"]:focus + label {
   background: #2f2f8e;
 }
 
@@ -494,8 +489,8 @@ h1 {
   border: 2px solid #222268;
 }
 
-.questions .questionsForm label:focus,
-.questions .questionsForm label:hover {
+.questions .questionsForm input[type="radio"]:focus + label,
+.questions .questionsForm input[type="radio"]:hover + label {
   background: #222268;
   color: #FFFFFF;
 }
