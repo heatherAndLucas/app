@@ -2,11 +2,11 @@
 const app = {};
 
 // Cache repetitive selectors
-const $questionsForm = $("#questionsForm"),
-      $modal = $(".modal"),
-      $modalOverlay = $(".modalOverlay"),
-      $playAgain = $("#playAgain"),
-      $answers = $("#answers");
+app.$questionsForm = $("#questionsForm"),
+app.$modal = $(".modal"),
+app.$modalOverlay = $(".modalOverlay"),
+app.$playAgain = $("#playAgain"),
+app.$answers = $("#answers");
 
 // Start app, run background animation
 app.init = function () {
@@ -23,11 +23,11 @@ app.init = function () {
 };
 
 // User selects difficulty level which is then stored into variable which is then put into API, run in app.startGame
-let difficulty = [];
+app.difficulty = [];
 
 app.chooseDifficulty = () => {
   let userDifficulty = $("#difficultyForm input[type=radio]:checked").val();
-  difficulty.push(userDifficulty);
+  app.difficulty.push(userDifficulty);
 };
 
 // When user clicks Start Game does check to make sure difficulty level is selected. Then displays categories. Run in app.init.
@@ -45,12 +45,12 @@ app.startGame = () => {
 };
 
 // When a category is clicked by the user, displays category clicked by pushing category value into variable which is then put into API, run in app.StartGame
-let catNumber = [];
+app.catNumber = [];
 
 app.displayCategory = () => {
   $(".catChoice").on( 'click', function() {
     newNum = this.id;
-    catNumber.push(newNum);
+    app.catNumber.push(newNum);
     app.getQuestions();
     $(this).attr("disabled", true);
     $('#categories').hide();
@@ -61,7 +61,7 @@ app.displayCategory = () => {
 // Gets data by running AJAX request with selected category and difficulty, stores results in questionsArray run in app.displayCategory
 app.getQuestions = () => {
   $.ajax({
-    url: `https://opentdb.com/api.php?amount=3&category=${catNumber}&difficulty=${difficulty}&type=multiple`,
+    url: `https://opentdb.com/api.php?amount=3&category=${app.catNumber}&difficulty=${app.difficulty}&type=multiple`,
     method: "GET",
     dataType: "json",
     data: {
@@ -120,9 +120,9 @@ app.displayQuestions = (questionsArray) => {
               <label for="${qNum}${shuffArray[3]}">${shuffArray[3]}</label>
             </fieldset>
         `;
-    $questionsForm.prepend(oneQuestion);
+    app.$questionsForm.prepend(oneQuestion);
   });
-  $questionsForm.append('<button id="submit" class="submit">Submit!</button>');
+  app.$questionsForm.append('<button id="submit" class="submit">Submit!</button>');
 };
 
 
@@ -145,25 +145,25 @@ app.submit = () => {
     } else {
 
       // If all questions have been answered show category results modal
-      $modal.addClass("active");
-      $modalOverlay.addClass("active");
+      app.$modal.addClass("active");
+      app.$modalOverlay.addClass("active");
 
       // Elements to remove from tab order when modal is open
-      const backgroundElements = $("header, footer, form, label, input, p, a, .submit")
+      app.backgroundElements = $("header, footer, form, label, input, p, a, .submit")
 
       // Trap focus inside modal when open
       $("header, footer, form, label, input").attr("aria-hidden", "true");
-      backgroundElements.attr("tabindex", "-1");
+      app.backgroundElements.attr("tabindex", "-1");
 
       // If this is the last category show final results button in modal instead of playAgain
       if ($(".catChoice:disabled").length === 6) {
         $("#finalResult").show();
         $("#finalResult").focus();
-        $playAgain.hide();
+        app.$playAgain.hide();
         app.finalResults();
       } else {
-        $playAgain.show();
-        $playAgain.focus();
+        app.$playAgain.show();
+        app.$playAgain.focus();
       }
 
       // Compare array of correct answers to array of user answers, display either correct or inccorrect statement in modal for each question.
@@ -171,10 +171,10 @@ app.submit = () => {
       for (var i = 0; i < app.userAns.length; i++) {
         // Use regex to fix bug on answers with symbols in them not being recognized as correct. 
         if (app.userAns[i].replace(/[^a-zA-Z0-9]+/g, "") === app.answer[i].replace(/&.*?;/gi, '').replace(/[^a-zA-Z0-9]+/g, "")) {
-          $answers.append(`<p>${app.userAns[i]} is correct!</p>`);
+          app.$answers.append(`<p>${app.userAns[i]} is correct!</p>`);
           correctAns = correctAns + 1;
         } else if (app.userAns[i] != app.answer[i]) {
-          $answers.append(
+          app.$answers.append(
             `<p>${app.userAns[i]} is incorrect. The correct answer was ${app.answer[i]}.</p>`
           );
         }
@@ -183,13 +183,13 @@ app.submit = () => {
       // If user gets most questions right, they pass. If not they fail. Displays message in modal, appends classes and icons to category depending on pass or fail.
       if (correctAns >= 2) {
         $("#win").html("<h2>You win this category!</h2>");
-        $(`#${catNumber}`).css("background", "green");
-        $(`#${catNumber}`).addClass("correct");
-        $(`#${catNumber}`).append(`<i class="fas fa-check" aria-label="pass"></i>`);
+        $(`#${app.catNumber}`).css("background", "green");
+        $(`#${app.catNumber}`).addClass("correct");
+        $(`#${app.catNumber}`).append(`<i class="fas fa-check" aria-label="pass"></i>`);
       } else {
         $("#win").html("<h2>You lose this category.</h2>");
-        $(`#${catNumber}`).css("background", "#c63f22");
-        $(`#${catNumber}`).append(`<i class="fas fa-times" aria-label="fail"></i>`);
+        $(`#${app.catNumber}`).css("background", "#c63f22");
+        $(`#${app.catNumber}`).append(`<i class="fas fa-times" aria-label="fail"></i>`);
       }
     }
   });
@@ -198,30 +198,30 @@ app.submit = () => {
 
 // When user clicks Play Again, remove modal, clear question and empty variables indicated, run in app.submit
 app.playAgain = () => {
-  $playAgain.click(function() {
-    $modal.removeClass("active");
-    $modalOverlay.removeClass("active");
+  app.$playAgain.click(function() {
+    app.$modal.removeClass("active");
+    app.$modalOverlay.removeClass("active");
 
     $("#categories").show();
 
     $(window).scrollTop(0);
 
-    $questionsForm.html("");
-    $answers.html("");
+    app.$questionsForm.html("");
+    app.$answers.html("");
 
-    catNumber = [];
+    app.catNumber = [];
     app.userAns = [];
     app.answer = [];
 
     // Return focus to page elements
     $("header, footer, form, label, input").attr("aria-hidden", "false");
-    backgroundElements.attr("tabindex", "0");
+    app.backgroundElements.attr("tabindex", "0");
 
   });
 };
 
 // HTML for game piece that shows up on results page 
-const gamePiece = `
+app.gamePiece = `
       <ul class="circle" aria-label="Trivial Pursuit game piece">
         <li>
           <div class="text artP" id="artP"></div>
@@ -268,9 +268,9 @@ app.colorPieces = () => {
 // When user click final results button, modal is removed, questions and categories is cleared and message is displayed depending on how many categories are correct, executed in app.submit.
 app.finalResults = () => {
   $("#finalResult").click(function() {
-    $modal.removeClass("active");
-    $modalOverlay.removeClass("active");
-    $questionsForm.html("");
+    app.$modal.removeClass("active");
+    app.$modalOverlay.removeClass("active");
+    app.$questionsForm.html("");
     $(".categories").hide();
 
     let numCorrect = $(".correct").length;
@@ -278,7 +278,7 @@ app.finalResults = () => {
       $("#resultsContainer").html(
         `<h2>You Win!</h2>
         <p> You got ${numCorrect}/6 categories correct!</p>
-        <div>${gamePiece}</div>
+        <div>${app.gamePiece}</div>
         <button id="newGame">New Game</button>
       `
       );
@@ -286,7 +286,7 @@ app.finalResults = () => {
       $("#resultsContainer").html(
         `<h2>You Lose!</h2>
         <p> You only got ${numCorrect}/6 categories correct.</p>
-        <div>${gamePiece}</div>
+        <div>${app.gamePiece}</div>
         <button id="newGame">New Game</button>
       `
       );
